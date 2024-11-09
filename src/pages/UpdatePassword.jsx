@@ -3,18 +3,16 @@ import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../common/Spinner";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { BiArrowBack } from "react-icons/bi";
-import { useLocation } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { resetPassword, getUser } from "../services/operations/authAPI";
 import Checkbox from "../components/core/ResetPass/Checkbox";
 import ResetComplete from "./ResetComplete";
+import OTPInput from "react-otp-input";
 
 const UpdatePassword = () => {
   const { loading } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-
-  const location = useLocation();
 
   const [formData, setFormData] = useState({
     password: "",
@@ -26,6 +24,7 @@ const UpdatePassword = () => {
   const { password, confirmPassword } = formData;
   const [passResetComplete, setPassResetComplete] = useState(false);
   const [email, setEmail] = useState("");
+  const [otp, setOtp] = useState("");
 
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
@@ -36,16 +35,10 @@ const UpdatePassword = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    const resetPasswordToken = location.pathname.split("/").at(-1);
     dispatch(
-      resetPassword(
-        password,
-        confirmPassword,
-        resetPasswordToken,
-        setPassResetComplete
-      )
+      resetPassword(password, confirmPassword, otp, setPassResetComplete)
     );
-    dispatch(getUser(resetPasswordToken)).then((userEmail) => {
+    dispatch(getUser(otp)).then((userEmail) => {
       console.log("User email:", userEmail);
       setEmail(userEmail);
     });
@@ -66,6 +59,32 @@ const UpdatePassword = () => {
             Almost done. Enter your new password and youre all set.
           </p>
           <form onSubmit={handleOnSubmit}>
+            <label className="relative">
+              <p className="text-sm text-richblack-5 mb-1">
+                Enter OTP <sup className="text-pink-200">*</sup>
+              </p>
+              <OTPInput
+                value={otp}
+                onChange={setOtp}
+                numInputs={6}
+                renderSeparator={<span> </span>}
+                renderInput={(props) => (
+                  <input
+                    {...props}
+                    placeholder="-"
+                    style={{
+                      boxShadow: "inset 0px -1px 0px rgba(255, 255, 255, 0.18)",
+                    }}
+                    className="border-0 mb-4 bg-richblack-800 rounded-[0.5rem] text-richblack-5 aspect-square text-center focus:border-0 focus:outline-2 focus:outline-yellow-50 w-[48px] lg:w-[52px]"
+                  />
+                )}
+                containerStyle={{
+                  justifyContent: "space-between",
+                  gap: "0 6px",
+                }}
+              />
+            </label>
+
             <label className="relative">
               <p className="mb-1 text-sm text-richblack-5">
                 New password <sup className="text-pink-200">*</sup>

@@ -12,7 +12,6 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { HiOutlineHome, HiUserGroup } from "react-icons/hi";
 import { IoIosArrowBack, IoIosCall } from "react-icons/io";
 import { IoLogInOutline } from "react-icons/io5";
-import { ImUserPlus } from "react-icons/im";
 import useOnClickOutside from "../hooks/useOnClickOutside";
 
 const Navbar = () => {
@@ -203,17 +202,6 @@ const Navbar = () => {
                   >
                     <IoLogInOutline />
                     Log in
-                  </button>
-                </Link>
-              )}
-              {token === null && (
-                <Link to={"/signup"}>
-                  <button
-                    onClick={() => setIsNavbarCollapsed(true)}
-                    className="border w-full flex gap-x-2 items-center border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 rounded-md"
-                  >
-                    <ImUserPlus />
-                    Sign up
                   </button>
                 </Link>
               )}

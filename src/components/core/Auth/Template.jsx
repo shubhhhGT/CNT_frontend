@@ -1,7 +1,6 @@
 import { useSelector } from "react-redux";
 import frameImg from "../../../assets/Images/frame.png";
 import LoginForm from "./LoginForm";
-import SignupForm from "./SignupForm";
 
 export default function Template({
   title,
@@ -31,7 +30,7 @@ export default function Template({
               </span>
             </p>
 
-            {formType === "login" ? <LoginForm /> : <SignupForm />}
+            {formType === "login" && <LoginForm />}
           </div>
 
           {/* Right Div */}

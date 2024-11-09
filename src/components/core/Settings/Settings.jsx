@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ChangeProfilePic from "./ChangeProfilePic";
 import EditProfile from "./EditProfile";
 import UpdatePassword from "./UpdatePassword";
-import DeleteProfile from "./DeleteProfile";
 import { useMediaQuery } from "react-responsive";
 import { GoSidebarCollapse, GoSidebarExpand } from "react-icons/go";
 import Sidebar from "../../core/Dashboard/Sidebar";
@@ -45,8 +44,6 @@ const Settings = () => {
       <EditProfile />
       {/* Component to chnage password */}
       <UpdatePassword />
-      {/* Component to delete profile */}
-      <DeleteProfile />
     </div>
   );
 };

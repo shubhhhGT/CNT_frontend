@@ -8,7 +8,6 @@ import PrivateRoute from "./components/core/Auth/PrivateRoute";
 import Login from "./pages/Login";
 import ForgotPassword from "./pages/ForgotPassword";
 import UpdatePassword from "./pages/UpdatePassword";
-import VerifyEmail from "./pages/VerifyEmail";
 import About from "./pages/About";
 import Error from "./pages/Error";
 import Contact from "./pages/Contact";
@@ -20,7 +19,6 @@ import { useSelector } from "react-redux";
 import MyCourses from "./components/core/Dashboard/MyCourses";
 import AddCourse from "./components/core/Dashboard/AddCourse";
 import EditCourse from "./components/core/Dashboard/EditCourse/EditCourse";
-import ViewCourse from "./pages/ViewCourse";
 import InstructorDashboard from "./components/core/Dashboard/InstructorDashboard/InstructorDashboard";
 import Category from "./components/core/Dashboard/Category";
 
@@ -55,19 +53,10 @@ function App() {
         />
 
         <Route
-          path="update-password/:id"
+          path="update-password"
           element={
             <OpenRoute>
               <UpdatePassword />
-            </OpenRoute>
-          }
-        />
-
-        <Route
-          path="verify-email"
-          element={
-            <OpenRoute>
-              <VerifyEmail />
             </OpenRoute>
           }
         />
@@ -119,14 +108,6 @@ function App() {
             </>
           )}
         </Route>
-
-        <Route
-          element={
-            <PrivateRoute>
-              <ViewCourse />
-            </PrivateRoute>
-          }
-        ></Route>
 
         {/* Error route */}
         <Route path="*" element={<Error />} />
