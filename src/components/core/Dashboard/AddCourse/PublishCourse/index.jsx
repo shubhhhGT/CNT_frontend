@@ -9,7 +9,7 @@ import { editCourseDetails } from "../../../../../services/operations/courseDeta
 import { useNavigate } from "react-router-dom";
 
 export const PublishCourse = () => {
-  const { register, getValues, setValue, handleSubmit } = useForm();
+  const { register, getValues, handleSubmit } = useForm();
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
