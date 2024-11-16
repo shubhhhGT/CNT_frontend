@@ -34,6 +34,7 @@ const InstructorDashboard = () => {
       }
       setLoading(false);
     })();
+    // eslint-disable-next-line
   }, []);
 
   const totalAmountGenerated = instructorData?.reduce(
