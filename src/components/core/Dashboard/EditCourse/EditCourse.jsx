@@ -32,6 +32,7 @@ const EditCourse = () => {
     };
 
     populateCourseDetails();
+    // eslint-disable-next-line
   }, []);
 
   if (loading) {
