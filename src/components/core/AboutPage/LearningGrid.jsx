@@ -5,42 +5,43 @@ import Button from "../HomePage/Button";
 const LearningGridArray = [
   {
     order: -1,
-    heading: "Financial Insights for",
-    highlightText: "Everyone, Everywhere",
+    heading: "Led by Vikash Bagaria - ",
+    highlightText:
+      "SEBI-Registered – 100% Legit, No Fake Gurus Here! with real market experience!",
     description:
-      "CntAcademy partners with top financial institutions and experts to deliver accessible, impactful, and practical investment knowledge for individuals and businesses worldwide.",
+      "Tired of guessing in the stock market? Losing money on bad trades? Watching others make profits while you're stuck? It's time to change the game!",
     BtnText: "Learn More",
     BtnLink: "/login",
   },
   {
     order: 1,
-    heading: "Market-Driven Curriculum",
+    heading: "Vikash Bagaria shares PROVEN, market & time tested strategies!",
     description:
-      "Stay ahead with our curriculum designed to align with current market needs and financial industry trends, making your learning both efficient and relevant.",
+      "Benefit from strategies that have been rigorously validated in real-world market conditions, ensuring you learn techniques that truly work.",
   },
   {
     order: 2,
-    heading: "Our Learning Approach",
+    heading: "No Useless Theory – 100% Practical Training!",
     description:
-      "Explore our diverse learning approaches at TradeSmart. We collaborate with industry leaders and experts to bring you the latest techniques and strategies for effective investing.",
+      "Dive into training that cuts through the fluff—everything you learn is immediately applicable, focusing on practical skills over outdated theory.",
   },
   {
     order: 3,
-    heading: "Certification",
+    heading: "Master Intraday, Swing, & Long-Term Investing in ONE Place!",
     description:
-      "Boost your credibility with industry-recognized certifications. Our curriculum is meticulously crafted to equip you with the skills and knowledge that top employers value in finance.",
+      "Gain a comprehensive skill set by learning multiple trading styles—from quick intraday moves to swing and long-term investments—all in one integrated program.",
   },
   {
     order: 4,
-    heading: `Real-Time Portfolio "Auto-Evaluation"`,
+    heading: `Join a Community of Smart Traders & Grow Together!`,
     description:
-      "Experience advanced auto-evaluation technology for seamless portfolio assessment, allowing you to stay focused on key investment strategies and decision-making.",
+      "Become part of a vibrant network of like-minded traders where sharing insights and collaborative growth are at the heart of the learning experience.",
   },
   {
     order: 5,
-    heading: "Prepared for the Market",
+    heading: "Learn the EXACT Strategies That Work for Pro Traders?",
     description:
-      "Get a competitive edge in the investment world. TradeSmart's curriculum is designed to align with industry demands, ensuring you're well-prepared to make informed decisions in the financial markets.",
+      "Discover the precise, battle-tested techniques used by professional traders, empowering you to make informed, confident decisions in the market.",
   },
 ];
 

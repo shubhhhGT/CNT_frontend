@@ -29,13 +29,17 @@ const ExploreMore = () => {
     <div>
       {/* Heading */}
       <div className="sm:w-full w-[90%] lg:text-4xl text-3xl font-semibold sm:text-center pl-3 sm:p-0">
-        Unlock the
-        <HighlightText text={"Power of Investment"} />
+        CNT Academy -
+        <HighlightText text={"Your Path to Market Domination!"} />
       </div>
 
       {/* Sub Heading */}
       <div className="sm:text-center pl-3 sm:p-0 text-richblack-300 text-[16px] md:text-lg font-semibold mt-3">
-        Learn to Build A Portfolio You Can't Imagine
+        At CNT Academy, we provide a structured and results-driven approach to
+        stock market education. Whether you're just starting or looking to
+        refine your advanced strategies, our courses are designed to empower you
+        with the right skills, knowledge, and confidence to navigate the markets
+        like a PRO!
       </div>
 
       {/* Tabs */}

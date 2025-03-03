@@ -30,6 +30,7 @@ export const settingsEndpoints = {
 export const profileEndpoints = {
   GET_USER_DETAILS_API: BASE_URL + "/profile/getUserDetails",
   GET_INSTRUCTOR_DATA_API: BASE_URL + "/profile/instructorDashboard",
+  GET_USER_ENROLLED_COURSES_API: BASE_URL + "/profile/getEnrolledCourses",
 };
 
 // Course Endpoints
@@ -59,4 +60,24 @@ export const ratingsEndpoints = {
 // Category Endpoints
 export const categoryEndpoints = {
   ADD_CATEGORY_API: BASE_URL + "/course/createCategory",
+};
+
+// Catalog Endpoint
+export const catalogEndpoint = {
+  CATALOG_DATA_API: BASE_URL + "/course/getCategoryPageDetails",
+};
+
+// Student Endpoints
+export const studentEndpoints = {
+  COURSE_PAYMENT_API: BASE_URL + "/payment/capturePayment",
+  COURSE_VERIFY_API: BASE_URL + "/payment/verifyPayment",
+  SEND_PAYMENT_SUCCESS_EMAIL_API: BASE_URL + "/payment/sendPaymentSuccessEmail",
+};
+
+// cart endpoints
+export const cartEndpoints = {
+  ADD_TO_CART: BASE_URL + "/course/addToCart",
+  REMOVE_FROM_CART: BASE_URL + "/course/removeFromCart",
+  GET_ENTIRE_CART: BASE_URL + "/course/getEntireCart",
+  RESET_CART: BASE_URL + "/course/resetCart",
 };

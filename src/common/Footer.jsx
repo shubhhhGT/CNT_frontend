@@ -8,7 +8,7 @@ import Logo from "../assets/Logo/CNT-logo.png";
 // Icons
 import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from "react-icons/fa";
 
-const BottomFooter = ["Privacy Policy", "Cookie Policy", "Terms"];
+const BottomFooter = ["Privacy Policy", "Terms and Conditions"];
 
 const Resources = [
   "Articles",
@@ -39,6 +39,11 @@ const Footer = () => {
                 width={150}
                 className="object-contain"
               />
+
+              <p className="text-[14px]">
+                Agnostic Edufin Private Limited 212,Girish Ghosh Road, Room No-
+                430, 4th Floor, P.S. Belur, Howrah
+              </p>
 
               <h1 className="text-base text-richblack-50 font-semibold">
                 Company
@@ -176,7 +181,12 @@ const Footer = () => {
                   } px-3`}
                   key={i}
                 >
-                  <Link to={ele.split(" ").join("-").toLowerCase()}>{ele}</Link>
+                  <Link
+                    to={ele.split(" ").join("-").toLowerCase()}
+                    className="hover:text-richblack-50"
+                  >
+                    {ele}
+                  </Link>
                 </div>
               );
             })}
@@ -184,7 +194,7 @@ const Footer = () => {
 
           <div className="text-center">
             Made with <span style={{ color: "red" }}>&#10084;&#65039;</span>{" "}
-            ShubhamGoswami © 2023 CntAcademy
+            ShubhamGoswami © 2025 CntAcademy
           </div>
         </div>
       </div>

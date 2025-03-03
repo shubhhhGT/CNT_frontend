@@ -12,42 +12,30 @@ import InstructorSection from "../components/core/HomePage/InstructorSection";
 import ExploreMore from "../components/core/HomePage/ExploreMore";
 import Footer from "../common/Footer";
 import ReviewSlider from "../common/ReviewSlideer";
+import { useSelector } from "react-redux";
 
 const Home = () => {
+  const { user } = useSelector((state) => state.profile);
   return (
     <div>
       {/* Section 1 */}
       <div className="relative gap-8 mx-auto flex flex-col w-11/12 max-w-maxContent items-center text-white justify-between">
-        {/* Become an Instructor button */}
-        <Link to={"/login"}>
-          <div className="group mt-16 p-1 mx-auto rounded-full bg-richblack-800 font-bold text-richblack-200 drop-shadow-[0_1.5px_rgba(255,255,255,0.25)] transition-all duration-200 hover:scale-95 w-fit">
-            <div className="flex items-center rounded-full px-10 py-[5px] transition-all duration-200 group-hover:bg-richblack-900 gap-2">
-              <p>Start Teaching Investment</p>
-              <FaArrowRight />
-            </div>
-          </div>
-        </Link>
-
         {/* Heading */}
-        <div className="text-center text-4xl font-semibold">
-          Empower Your Financial Future with{" "}
-          <HighlightText text={"Stock Market Skills"} />
+        <div className="text-center text-4xl font-semibold mt-16 mx-auto w-[90%]">
+          CNT Academy – Transforming Knowledge into Financial Success!{" "}
+          <HighlightText text={"Learn – Apply – Succeed"} />
         </div>
 
         {/* Sub Heading */}
-        <div className="-mt-3 text-center w-[90%] mx-auto text-lg font-bold text-richblack-300">
-          Learn the intricacies of the stock market with our expert-led courses.
-          From basic to advanced trading strategies, we offer hands-on lessons
-          tailored to boost your investing knowledge.
+        <div className="-mt-3 text-center w-[90%] mx-auto text-lg font-bold text-richblack-300 italic">
+          "STOP Losing Money! START Trading Like the Pros! The stock market
+          isn’t a gamble—IF you know the right strategies!"
         </div>
 
         {/* CTA buttons */}
         <div className="flex flex-row gap-7 mt-8">
           <CTAButton active={true} linkto={"/login"}>
             Learn More
-          </CTAButton>
-          <CTAButton active={false} linkto={"/login"}>
-            Start Teaching
           </CTAButton>
         </div>
 
@@ -69,16 +57,16 @@ const Home = () => {
             position={"lg:flex-row"}
             heading={
               <div className="text-4xl font-semibold">
-                Unlock your <HighlightText text={"investment potential "} />{" "}
-                with our courses
+                <HighlightText text={"Welcome to CNT Academy -"} /> Where
+                Traders Are Made, Not Born!
               </div>
             }
             subheading={
-              "Our stock market courses are designed by industry veterans who understand the nuances of financial markets and are eager to share their expertise with you."
+              "Led by SEBI-registered research analyst Vikash Bagaria, CNT Academy provides expert education in Technical & Fundamental Analysis, options trading, risk management, and everything you need to navigate the markets like a pro."
             }
             ctabtn1={{
               active: true,
-              linkto: "/login",
+              linkto: "/signup",
               text: "Enroll Now",
             }}
             ctabtn2={{
@@ -86,15 +74,15 @@ const Home = () => {
               linkto: "/login",
               text: "Learn More",
             }}
-            codeblock={`Welcome to Investment Courses
-                        Explore a range of topics:
-                        - Stock market fundamentals
-                        - Trading strategies
-                        - Financial analysis
-                        - Risk management techniques
-                        Get the knowledge you need
-                        to make confident investment decisions.
-                        Join our community of learners.`}
+            codeblock={`Introduction to Candlestick Patterns & Chart Reading.
+                        Moving Averages, RSI, MACD, and Other Key Indicators.
+                        How to Identify Support & Resistance Levels.
+                        Trend Reversals & Breakout Trading Strategies.
+                        Real-Time Market Analysis & Practical Applications.
+                        How to Identify Undervalued & High-Growth Stocks.
+                        Understanding Financial Statements. (Balance Sheet, P&L, Cash Flow)
+                        The Science Behind Risk & Reward in Trading.
+                        How to Set Stop-Loss & Take-Profit Levels Effectively.`}
             codeColor={"text-yellow-25"}
             backgroundGradient={<div className="codeblock1 absolute"></div>}
           />
@@ -105,16 +93,17 @@ const Home = () => {
           <CodeBlocks
             position={"lg:flex-row-reverse"}
             heading={
-              <div className="w-[100%] lg:w-[50%] text-4xl font-semibold">
-                Start <HighlightText text={"investing in seconds"} />
+              <div className="w-[100%] text-4xl font-semibold">
+                Stock Market Success Isn’t Luck –{" "}
+                <HighlightText text={"It’s Strategy! Learn Now!"} />
               </div>
             }
             subheading={
-              "Experience hands-on learning with real-time investment simulations and portfolio management from day one."
+              "CNT Academy is an stock market institute that provides the most simplified and to-the-point stock market course from the scratch for beginners."
             }
             ctabtn1={{
               active: true,
-              linkto: "/login",
+              linkto: user ? "/dashboard/enrolled-courses" : "/signup",
               text: "Continue Lesson",
             }}
             ctabtn2={{
@@ -122,16 +111,16 @@ const Home = () => {
               linkto: "/login",
               text: "Learn More",
             }}
-            codeblock={`Investment Home
-                        Start building your skills in:
-                        - Market trend analysis
-                        - Portfolio management
-                        - Stock valuation techniques
-                        Unlock insights that can shape
-                        your financial future.
-                        Let’s dive into real-world scenarios
-                        and practical strategies.
-                        Become an informed investor today.`}
+            codeblock={`Managing Emotions in Trading – Fear & Greed Control.
+                        How to Stay Disciplined & Consistent in Trading.
+                        Avoiding Common Trading Pitfalls.
+                        Swing Trading vs. Day Trading – Which One Suits You?
+                        Fibonacci Retracement & Advanced Charting Techniques.
+                        Scalping & Momentum Trading Tactics.
+                        Trading with Volume & Market Sentiment Indicators.
+                        Understanding Options. (Calls, Puts, Strike Prices, Expiry)
+                        Options Pricing & The Greeks Explained.
+                        How Institutions Use Derivatives to Hedge Risk.`}
             codeColor={"text-white"}
             backgroundGradient={<div className="codeblock2 absolute"></div>}
           />

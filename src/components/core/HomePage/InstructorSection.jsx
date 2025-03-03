@@ -3,8 +3,10 @@ import instructor from "../../../assets/Images/Instructor.png";
 import HighlightText from "./HighlightText";
 import CTAButton from "./Button";
 import { FaArrowRight } from "react-icons/fa";
+import { useSelector } from "react-redux";
 
 const InstructorSection = () => {
+  const { user } = useSelector((state) => state.profile);
   return (
     <div>
       <div className="flex flex-col lg:flex-row gap-20 items-center">
@@ -19,20 +21,26 @@ const InstructorSection = () => {
 
         {/* Right container */}
         <div className="lg:w-[50%] flex-col flex gap-10">
-          <div className="lg:w-[50%] text-4xl font-semibold">
-            Become an
-            <HighlightText text={"Instructor"} />
+          <div className="w-full text-4xl font-semibold">
+            CNT Academy –
+            <HighlightText text={"Your Path to Market Domination!"} />
           </div>
 
           <div className="text-base font-medium text-justify w-[90%] text-richblack-300">
-            Instructors from around the world teach millions of students on
-            CntAcademy. We provide the tools and skills to teach what you love.
+            At CNT Academy, we provide a structured and results-driven approach
+            to stock market education. Whether you're just starting or looking
+            to refine your advanced strategies, our courses are designed to
+            empower you with the right skills, knowledge, and confidence to
+            navigate the markets like a PRO!
           </div>
 
           <div className="w-fit">
-            <CTAButton active={true} linkto={"/login"}>
+            <CTAButton
+              active={true}
+              linkto={user ? "/dashboard/enrolled-courses" : "/login"}
+            >
               <div className="flex items-center gap-3">
-                Start Teaching Today
+                Start Learning Today
                 <FaArrowRight />
               </div>
             </CTAButton>

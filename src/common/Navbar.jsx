@@ -2,7 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Logo from "../assets/Logo/CNT-logo.png";
 import { Link, matchPath, useLocation } from "react-router-dom";
 import { NavbarLinks } from "../data/navbar-links";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { AiOutlineShoppingCart } from "react-icons/ai";
 import ProfileDropdown from "../components/core/Auth/ProfileDropdown";
 import { apiConnector } from "../services/apiconnector";
 import { categories } from "../services/apis";
@@ -12,10 +13,16 @@ import { AiOutlineMenu } from "react-icons/ai";
 import { HiOutlineHome, HiUserGroup } from "react-icons/hi";
 import { IoIosArrowBack, IoIosCall } from "react-icons/io";
 import { IoLogInOutline } from "react-icons/io5";
+import { ImUserPlus } from "react-icons/im";
 import useOnClickOutside from "../hooks/useOnClickOutside";
+import { ACCOUNT_TYPE } from "../utils/constants";
+import { getEntireCart } from "../services/operations/cartAPI";
+import { setTotalItems } from "../slices/cartSlice";
 
 const Navbar = () => {
   const { token } = useSelector((state) => state.auth);
+  const { user } = useSelector((state) => state.profile);
+  const { totalItems } = useSelector((state) => state.cart);
 
   const [subLinks, setSubLinks] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -26,6 +33,28 @@ const Navbar = () => {
 
   // Using onClickOutside to handle state changes for clicking outside
   useOnClickOutside(ref, () => setIsNavbarCollapsed(true));
+
+  const [cart, setCart] = useState(null);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    if (token && user.accountType !== ACCOUNT_TYPE.ADMIN) {
+      const getCartDetails = async () => {
+        setLoading(true);
+        try {
+          const cartData = await getEntireCart(token);
+          setCart(cartData);
+          dispatch(setTotalItems(cartData?.data?.data?.totalItems));
+        } catch (error) {
+          console.log(error);
+        }
+        setLoading(false);
+      };
+
+      getCartDetails();
+    }
+    // eslint-disable-next-line
+  }, [user, token]);
 
   const fetchSublinks = async () => {
     setLoading(true);
@@ -114,10 +143,27 @@ const Navbar = () => {
 
         {/* Login/signup/ dashboard buttons */}
         <div className="flex gap-x-4 items-center">
+          {user && user?.accountType !== "Admin" && (
+            <Link to={"/dashboard/cart"} className="relative">
+              <AiOutlineShoppingCart className="hidden md:block text-2xl text-richblack-100" />
+              {totalItems > 0 && (
+                <span className="hidden md:grid absolute -bottom-2 -right-2 h-5 w-5 place-items-center overflow-hidden rounded-full bg-richblack-600 text-center text-xs font-bold text-yellow-100">
+                  {totalItems}
+                </span>
+              )}
+            </Link>
+          )}
           {token === null && (
             <Link to={"/login"}>
               <button className="hidden md:block border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 rounded-md">
                 Log in
+              </button>
+            </Link>
+          )}
+          {token === null && (
+            <Link to={"/signup"}>
+              <button className="hidden md:block border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 rounded-md">
+                Sign up
               </button>
             </Link>
           )}
@@ -202,6 +248,17 @@ const Navbar = () => {
                   >
                     <IoLogInOutline />
                     Log in
+                  </button>
+                </Link>
+              )}
+              {token === null && (
+                <Link to={"/signup"}>
+                  <button
+                    onClick={() => setIsNavbarCollapsed(true)}
+                    className="border w-full flex gap-x-2 items-center border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100 rounded-md"
+                  >
+                    <ImUserPlus />
+                    Sign up
                   </button>
                 </Link>
               )}

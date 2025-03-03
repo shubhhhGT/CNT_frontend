@@ -34,4 +34,18 @@ export const sidebarLinks = [
     type: ACCOUNT_TYPE.ADMIN,
     icon: "VscSymbolConstant",
   },
+  {
+    id: 5,
+    name: "Enrolled Courses",
+    path: "/dashboard/enrolled-courses",
+    type: ACCOUNT_TYPE.USER,
+    icon: "VscMortarBoard",
+  },
+  {
+    id: 6,
+    name: "Your Cart",
+    path: "/dashboard/cart",
+    type: ACCOUNT_TYPE.USER,
+    icon: "VscPackage",
+  },
 ];
