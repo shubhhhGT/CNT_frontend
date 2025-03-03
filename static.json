@@ -1,0 +1,9 @@
+{
+    "routes": [
+      {
+        "path": "/*",
+        "destination": "./pubic/index.html"
+      }
+    ]
+  }
+  
