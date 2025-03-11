@@ -50,6 +50,8 @@ export const courseEndpoints = {
   DELETE_COURSE_API: BASE_URL + "/course/deleteCourse",
   GET_FULL_COURSE_DETAILS_AUTHENTICATED:
     BASE_URL + "/course/getFullCourseDetails",
+  GET_COURSE_BY_TYPE: BASE_URL + "/course/getCoursesByType/:courseType",
+  GET_COURSE_BY_STRATERGY: BASE_URL + "/course/getCoursesByStratergy",
 };
 
 // RATINGS AND REVIEWS

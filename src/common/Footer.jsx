@@ -13,22 +13,25 @@ const BottomFooter = ["Privacy Policy", "Terms and Conditions"];
 const Resources = [
   "Articles",
   "Blog",
-  "Chart Sheet",
   "Market Analysis",
-  "Docs",
-  "Projects",
   "Videos",
-  "Workspaces",
+  "Free Newsletter",
 ];
 
 const Plans = ["Paid Memberships", "For Students", "Business Solutions"];
-const Community = ["Forums", "Chapters", "Events"];
-const Company = ["About", "Careers", "Affiliates"];
+const Community = ["Forums", "Webinars", "Events"];
+const Company = [
+  "About",
+  "Careers",
+  "Affiliates",
+  "QnA Sessions",
+  "Testimonials",
+];
 
 const Footer = () => {
   return (
     <div className="bg-richblack-800">
-      <div className="flex lg:flex-row flex-col w-11/12 gap-8 items-center justify-between max-w-maxContent text-richblack-400 leading-6 mx-auto relative py-14">
+      <div className="flex lg:flex-row flex-col w-11/12 gap-8 items-center justify-between max-w-maxContent text-richblack-400 leading-6 mx-auto relative py-10">
         <div className="border-b w-full flex flex-col lg:flex-row pb-5 border-richblack-700">
           {/* Section 1 */}
           <div className="lg:w-[50%] flex flex-row flex-wrap justify-between lg:border-r lg:border-richblack-700 pl-3 lg:pr-5 gap-3">
@@ -45,23 +48,6 @@ const Footer = () => {
                 430, 4th Floor, P.S. Belur, Howrah
               </p>
 
-              <h1 className="text-base text-richblack-50 font-semibold">
-                Company
-              </h1>
-
-              <div className="flex flex-col gap-2">
-                {Company.map((element, index) => {
-                  return (
-                    <div
-                      className="text-[14px] cursor-pointer hover:text-richblack-50 transition-all duration-200"
-                      key={index}
-                    >
-                      <Link to={element.toLowerCase()}>{element}</Link>
-                    </div>
-                  );
-                })}
-              </div>
-
               <div className="flex gap-3 text-lg ">
                 <FaFacebook className="hover:cursor-pointer hover:text-richblack-50" />
                 <FaGoogle className="hover:cursor-pointer hover:text-richblack-50" />
@@ -72,11 +58,11 @@ const Footer = () => {
 
             <div className="w-[48%] lg:w-[30%] mb-7 lg:pl-0">
               <h2 className="text-base text-richblack-50 font-semibold">
-                Resources
+                Company
               </h2>
 
               <div className="flex flex-col gap-2 mt-2">
-                {Resources.map((element, index) => {
+                {Company.map((element, index) => {
                   return (
                     <div
                       key={index}
@@ -168,7 +154,7 @@ const Footer = () => {
         </div>
       </div>
 
-      <div className="flex flex-row items-center justify-between w-11/12 max-w-maxContent text-richblack-400 mx-auto  pb-14 text-sm">
+      <div className="flex flex-row items-center justify-between w-11/12 max-w-maxContent text-richblack-400 mx-auto  pb-10 text-sm">
         <div className="flex justify-between lg:items-start items-center flex-col lg:flex-row gap-3 w-full">
           <div className="flex flex-row">
             {BottomFooter.map((ele, i) => {

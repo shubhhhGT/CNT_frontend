@@ -1,29 +1,51 @@
-import React, { useState } from "react";
-import { HomePageExplore } from "../../../data/homepage-explore";
+import React, { useEffect, useState } from "react";
 import HighlightText from "./HighlightText";
 import CourseCard from "./CourseCard";
+import { getCourseBytype } from "../../../services/operations/courseDetailsAPI";
 
 const ExploreMore = () => {
   const tabNames = [
     "Free",
     "New to Trading",
     "Most popular",
-    "Skills paths",
-    "Career paths",
+    "Intermediate",
+    "Advanced",
   ];
 
   const [currentTab, setCurrentTab] = useState(tabNames[0]);
-  const [courses, setCourses] = useState(HomePageExplore[0].courses);
-  const [selectedCard, setSelectedCard] = useState(
-    HomePageExplore[0].courses[0].heading
-  );
+  const [courses, setCourses] = useState([]);
+  const [selectedCard, setSelectedCard] = useState(null);
+  const [loading, setLoading] = useState(false);
+
+  const fetchCourses = async (courseType) => {
+    setLoading(true);
+    try {
+      const allCourses = await getCourseBytype(courseType);
+      console.log("api response", allCourses);
+      if (allCourses) {
+        setCourses(allCourses);
+        setSelectedCard(allCourses[0].courseName); // Assuming the API returns a similar structure
+      } else {
+        setCourses([]);
+        setSelectedCard(null);
+      }
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const setMyCards = (value) => {
     setCurrentTab(value);
-    const result = HomePageExplore.filter((courses) => courses.tag === value);
-    setCourses(result[0].courses);
-    setSelectedCard(result[0].courses[0].heading);
+    if (value === "New to Trading") value = "Beginner";
+    fetchCourses(value);
   };
+
+  useEffect(() => {
+    // Fetch courses initially for the default tab
+    fetchCourses(currentTab);
+  }, []);
 
   return (
     <div>
@@ -34,7 +56,7 @@ const ExploreMore = () => {
       </div>
 
       {/* Sub Heading */}
-      <div className="sm:text-center pl-3 sm:p-0 text-richblack-300 text-[16px] md:text-lg font-semibold mt-3">
+      <div className="sm:text-center pl-3 sm:p-0 text-richblack-300 text-[16px] md:text-lg font-semibold mt-3 mb-24 lg:mb-0">
         At CNT Academy, we provide a structured and results-driven approach to
         stock market education. Whether you're just starting or looking to
         refine your advanced strategies, our courses are designed to empower you
@@ -47,7 +69,7 @@ const ExploreMore = () => {
         {tabNames.map((element, index) => {
           return (
             <div
-              className={`text-base flex flex-row items-center gap-2 
+              className={`text-base flex flex-row items-center gap-2
                          ${
                            currentTab === element
                              ? "bg-richblack-900 text-richblack-5 font-medium"

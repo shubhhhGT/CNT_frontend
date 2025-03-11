@@ -19,6 +19,8 @@ const {
   GET_FULL_COURSE_DETAILS_AUTHENTICATED,
   CREATE_RATING_API,
   LECTURE_COMPLETION_API,
+  GET_COURSE_BY_TYPE,
+  GET_COURSE_BY_STRATERGY,
 } = courseEndpoints;
 
 export const getAllCourses = async () => {
@@ -380,4 +382,43 @@ export const createRating = async (data, token) => {
   }
   toast.dismiss(toastId);
   return success;
+};
+
+// Get course by type
+export const getCourseBytype = async (courseType) => {
+  let result = null;
+  try {
+    // Construct the endpoint with the courseType parameter
+    const response = await apiConnector(
+      "GET",
+      GET_COURSE_BY_TYPE.replace(":courseType", courseType)
+    );
+    console.log("GET COURSE BY TYPE API RESPONSE............", response);
+    if (!response?.data?.success) {
+      throw new Error("Could Not Fetch Courses");
+    }
+    result = response.data.courses; // Assuming the courses are returned here
+  } catch (error) {
+    console.log("GET COURSE BY TYPE API ERROR............", error);
+    toast.error(error.message);
+  }
+  return result;
+};
+
+// Get course by stratergy
+export const getCourseByStratergy = async (courseType) => {
+  let result = null;
+  try {
+    // Construct the endpoint with the courseType parameter
+    const response = await apiConnector("GET", GET_COURSE_BY_STRATERGY);
+    console.log("GET COURSE BY STRATERGY API RESPONSE............", response);
+    if (!response?.data?.success) {
+      throw new Error("Could Not Fetch Courses");
+    }
+    result = response.data.courses; // Assuming the courses are returned here
+  } catch (error) {
+    console.log("GET COURSE BY TYPE API ERROR............", error);
+    toast.error(error.message);
+  }
+  return result;
 };

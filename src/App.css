@@ -122,3 +122,61 @@ input[type="number"]::-webkit-inner-spin-button {
 input[type="number"] {
   -moz-appearance: textfield; /* Firefox */
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Satisfy&display=swap");
+.font-satisfy {
+  font-family: "Satisfy", cursive;
+}
+.drop-shadow-glow {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+/* something extra */
+/* Add to your global CSS */
+.card-glow {
+  box-shadow: 0 0 40px rgba(23, 212, 173, 0.1);
+  transition: box-shadow 0.3s ease;
+}
+
+.card-glow:hover {
+  box-shadow: 0 0 60px rgba(23, 212, 173, 0.2);
+}
+
+/* Gradient border animation */
+@keyframes borderRotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.gradient-border::before {
+  content: "";
+  position: absolute;
+  z-index: -1;
+  inset: -2px;
+  background: conic-gradient(
+    from 180deg at 50% 50%,
+    #e65c00 0deg,
+    #f9d423 180deg,
+    #3d00e6 360deg
+  );
+  animation: borderRotate 4s linear infinite;
+  border-radius: inherit;
+}
+
+/* Add to your global CSS */
+body {
+  overflow-x: hidden;
+}
+
+.smooth-transition {
+  transition: all 0.3s ease-in-out;
+}
+
+.hover-scale {
+  transition: transform 0.3s ease;
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}

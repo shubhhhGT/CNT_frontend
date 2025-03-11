@@ -1,11 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import HighlightText from "./HighlightText";
 import Know_your_progress from "../../../assets/Images/Know_your_progress.png";
 import Compare_with_others from "../../../assets/Images/Compare_with_others.png";
 import Plan_your_lessons from "../../../assets/Images/Plan_your_lessons.png";
 import CTAButton from "./Button";
+import { getCourseByStratergy } from "../../../services/operations/courseDetailsAPI";
+import StratergyCards from "./StratergyCards";
 
 const LearningLanguageSection = () => {
+  const [courses, setCourses] = useState([]);
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      const result = await getCourseByStratergy();
+      setCourses(result);
+    };
+    fetchCourses();
+  }, []);
   return (
     <div>
       <div className="flex flex-col">
@@ -23,7 +34,7 @@ const LearningLanguageSection = () => {
         </div>
 
         {/* Cards */}
-        <div className="flex flex-col lg:flex-row items-center justify-center mt-8 lg:mt-0">
+        {/* <div className="flex flex-col lg:flex-row items-center justify-center mt-8 lg:mt-0">
           <img
             src={Know_your_progress}
             alt="KnowYourProgress"
@@ -39,6 +50,10 @@ const LearningLanguageSection = () => {
             alt="PlanYourLessons"
             className="object-contain lg:-ml-36 lg:-mt-5 -mt-16"
           />
+        </div> */}
+        {/* Course Cards */}
+        <div className="flex items-center justify-center mt-8 lg:mt-0">
+          <StratergyCards courses={courses} />
         </div>
 
         {/* Button */}

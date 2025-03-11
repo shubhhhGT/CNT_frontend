@@ -16,7 +16,7 @@ import {
 } from "../../../../../slices/courseSlice";
 import { MdNavigateNext } from "react-icons/md";
 import { toast } from "react-hot-toast";
-import { COURSE_STATUS } from "../../../../../utils/constants";
+import { COURSE_STATUS, COURSE_TYPE } from "../../../../../utils/constants";
 import TagInput from "./TagInput";
 import CourseThumbnail from "./CourseThumbnail";
 
@@ -59,6 +59,7 @@ const CourseInformationForm = () => {
       setValue("courseBenefits", course.whatYouWillLearn);
       setValue("courseRequirements", course.instructions);
       setValue("courseImage", course.thumbnail);
+      setValue("courseType", course.courseType);
     }
 
     getCategories();
@@ -76,7 +77,8 @@ const CourseInformationForm = () => {
       currentValues.courseBenefits !== course.whatYouWillLearn ||
       currentValues.courseImage !== course.thumbnail ||
       currentValues.courseRequirements.toString() !==
-        course.instructions.toString()
+        course.instructions.toString() ||
+      currentValues.courseType !== course.courseType
     )
       return true;
     else return false;
@@ -112,6 +114,10 @@ const CourseInformationForm = () => {
 
         if (currentValues.courseCategory._id !== course.category._id) {
           formData.append("category", data.courseCategory);
+        }
+
+        if (currentValues.courseType !== course.courseType) {
+          formData.append("courseType", data.courseType);
         }
 
         if (
@@ -160,6 +166,7 @@ const CourseInformationForm = () => {
       formData.append("tag", JSON.stringify(data.courseTags));
       formData.append("thumbnailImage", data.courseImage);
       formData.append("status", COURSE_STATUS.DRAFT);
+      formData.append("courseType", data.courseType);
 
       setLoading(true);
       const result = await addCourseDetails(formData, token);
@@ -306,6 +313,33 @@ const CourseInformationForm = () => {
         {errors.courseBenefits && (
           <span className="ml-2 text-xs tracking-wide text-pink-200">
             Please enter Course Benefits.
+          </span>
+        )}
+      </div>
+
+      {/* Course Type */}
+      <div className="flex flex-col space-y-2">
+        <label htmlFor="courseType" className="text-sm text-richblack-5">
+          Course Type <sup className="text-pink-200">*</sup>
+        </label>
+        <select
+          id="courseType"
+          defaultValue=""
+          className="form-style !bg-richblack-700"
+          {...register("courseType", { required: true })}
+        >
+          <option value="" disabled>
+            Choose a Course Type
+          </option>
+          {Object.entries(COURSE_TYPE).map(([key, value]) => (
+            <option key={key} value={value}>
+              {value}
+            </option>
+          ))}
+        </select>
+        {errors.courseType && (
+          <span className="ml-2 text-xs tracking-wide text-pink-200">
+            Please select a course type.
           </span>
         )}
       </div>

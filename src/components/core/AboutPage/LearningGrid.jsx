@@ -1,6 +1,8 @@
 import React from "react";
 import HighlightText from "../HomePage/HighlightText";
 import Button from "../HomePage/Button";
+import { motion } from "framer-motion";
+import { useInView } from "react-intersection-observer";
 
 const LearningGridArray = [
   {
@@ -45,53 +47,88 @@ const LearningGridArray = [
   },
 ];
 
+const CardComponent = ({ card, index }) => {
+  const [ref, inView] = useInView({
+    triggerOnce: false,
+    threshold: 0.1,
+    rootMargin: "-50px 0px",
+  });
+
+  const isSpecialCard = card.order === -1;
+
+  const variants = {
+    hidden: {
+      ...(isSpecialCard ? { scale: 0.8 } : { rotateY: 90 }),
+      opacity: 0,
+    },
+    visible: {
+      ...(isSpecialCard ? { scale: 1 } : { rotateY: 0 }),
+      opacity: 1,
+      transition: {
+        type: "spring",
+        stiffness: isSpecialCard ? 100 : 80,
+        damping: 15,
+        mass: 0.5,
+      },
+    },
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      initial="hidden"
+      animate={inView ? "visible" : "hidden"}
+      variants={variants}
+      transition={{
+        duration: 0.8,
+        delay: isSpecialCard ? 0 : index * 0.2,
+      }}
+      className={`${index === 0 && "xl:col-span-2 xl:h-[294px]"} 
+        ${
+          card.order % 2 === 1
+            ? "bg-richblack-700 h-[294px]"
+            : card.order % 2 === 0
+            ? "bg-richblack-800 h-[294px]"
+            : "bg-transparent"
+        }
+        ${card.order === 3 && "xl:col-start-2"}`}
+    >
+      {isSpecialCard ? (
+        <div className="flex flex-col xl:w-[90%] gap-3 pb-10 xl:pb-0">
+          <h2 className="text-4xl font-semibold">
+            {card.heading}
+            <span>
+              <HighlightText text={card.highlightText} />
+            </span>
+          </h2>
+          <p className="font-medium text-richblack-300">{card.description}</p>
+          <div className="w-fit mt-2">
+            <Button
+              active={true}
+              children={card.BtnText}
+              linkto={card.BtnLink}
+            />
+          </div>
+        </div>
+      ) : (
+        <motion.div
+          className="p-8 flex flex-col gap-8"
+          whileHover={{ scale: 1.05 }}
+        >
+          <h3 className="text-lg text-richblack-5">{card.heading}</h3>
+          <p className="font-medium text-richblack-300">{card.description}</p>
+        </motion.div>
+      )}
+    </motion.div>
+  );
+};
+
 const LearningGrid = () => {
   return (
     <div className="grid mx-auto grid-cols-1 xl:grid-cols-4 mb-12 w-[350px] xl:w-fit">
-      {LearningGridArray.map((card, index) => {
-        return (
-          <div
-            key={index}
-            className={`${index === 0 && "xl:col-span-2 xl:h-[294px]"} 
-                ${
-                  card.order % 2 === 1
-                    ? "bg-richblack-700 h-[294px]"
-                    : card.order % 2 === 0
-                    ? "bg-richblack-800 h-[294px]"
-                    : "bg-transparent"
-                }
-                ${card.order === 3 && "xl:col-start-2"}`}
-          >
-            {card.order === -1 ? (
-              <div className="flex flex-col xl:w-[90%] gap-3 pb-10 xl:pb-0">
-                <h2 className="text-4xl font-semibold">
-                  {card.heading}
-                  <span>
-                    <HighlightText text={card.highlightText} />
-                  </span>
-                </h2>
-                <p className="font-medium text-richblack-300">
-                  {card.description}
-                </p>
-                <div className="w-fit mt-2">
-                  <Button
-                    active={true}
-                    children={card.BtnText}
-                    linkto={card.BtnLink}
-                  />
-                </div>
-              </div>
-            ) : (
-              <div className="p-8 flex flex-col gap-8">
-                <h3 className="text-lg text-richblack-5">{card.heading}</h3>
-                <p className="font-medium text-richblack-300">
-                  {card.description}
-                </p>
-              </div>
-            )}
-          </div>
-        );
-      })}
+      {LearningGridArray.map((card, index) => (
+        <CardComponent key={index} card={card} index={index} />
+      ))}
     </div>
   );
 };

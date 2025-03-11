@@ -6,6 +6,13 @@ module.exports = {
       inter: ["Inter", "sans-serif"],
       "edu-sa": ["Edu SA Beginner", "cursive"],
       mono: ["Roboto Mono", "monospace"],
+      handwriting: ["Dancing Script", "cursive"],
+    },
+    dropShadow: {
+      glow: [
+        "0 0 8px rgba(255, 255, 255, 0.5)",
+        "0 0 15px rgba(255, 255, 255, 0.3)",
+      ],
     },
     colors: {
       white: "#fff",
