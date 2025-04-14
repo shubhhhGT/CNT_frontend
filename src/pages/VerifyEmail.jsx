@@ -26,18 +26,11 @@ const VerifyEmail = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    const {
-      accountType,
-      firstName,
-      lastName,
-      email,
-      password,
-      confirmPassword,
-    } = signupData;
+    const { firstName, lastName, email, password, confirmPassword } =
+      signupData;
 
     dispatch(
       signup(
-        accountType,
         firstName,
         lastName,
         email,
