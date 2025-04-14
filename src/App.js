@@ -29,6 +29,7 @@ import Cart from "./components/core/Dashboard/Cart/Cart";
 import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
 import TermsAndConditions from "./components/core/Footer/TermsAndConditions";
 import PrivacyPolicy from "./components/core/Footer/PrivacyPolicy";
+import VerifyEmail from "./pages/VerifyEmail";
 
 function App() {
   const { user } = useSelector((state) => state.profile);
@@ -85,6 +86,15 @@ function App() {
           element={
             <OpenRoute>
               <About />
+            </OpenRoute>
+          }
+        />
+
+        <Route
+          path="verify-email"
+          element={
+            <OpenRoute>
+              <VerifyEmail />
             </OpenRoute>
           }
         />
