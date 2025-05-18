@@ -84,3 +84,10 @@ export const cartEndpoints = {
   GET_ENTIRE_CART: BASE_URL + "/course/getEntireCart",
   RESET_CART: BASE_URL + "/course/resetCart",
 };
+
+// upload endpoints
+export const uploadEndpoints = {
+  INITIATE_UPLOAD: BASE_URL + "/upload/initiate-upload",
+  GENERATE_SIGNED_URL: BASE_URL + "/upload/generate-urls",
+  COMPLETE_UPLOAD: BASE_URL + "/upload/complete-upload",
+};

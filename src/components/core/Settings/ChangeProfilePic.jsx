@@ -3,6 +3,7 @@ import Iconbtn from "../../../common/Iconbtn";
 import { FiUpload } from "react-icons/fi";
 import { useDispatch, useSelector } from "react-redux";
 import { updateProfiepicture } from "../../../services/operations/SettingsAPI";
+import { uploadVideoInChunks } from "../../../utils/chunkedUpload";
 
 const ChangeProfilePic = () => {
   const { user } = useSelector((state) => state.profile);
@@ -40,15 +41,16 @@ const ChangeProfilePic = () => {
     }
   }, [imageFile]);
 
-  const handleFileupload = () => {
+  const handleFileupload = async () => {
     try {
-      console.log("Uploading...");
       setLoading(true);
       const formData = new FormData();
-      formData.append("profilePicture", imageFile);
+      const picture = await uploadVideoInChunks(imageFile, token);
+      formData.append("profilePicture", picture);
       dispatch(updateProfiepicture(token, formData)).then(() => {
         setLoading(false);
       });
+      setLoading(false);
     } catch (error) {
       console.log("Error message...", error.message);
     }

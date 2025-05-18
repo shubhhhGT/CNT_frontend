@@ -19,6 +19,7 @@ import { toast } from "react-hot-toast";
 import { COURSE_STATUS, COURSE_TYPE } from "../../../../../utils/constants";
 import TagInput from "./TagInput";
 import CourseThumbnail from "./CourseThumbnail";
+import { uploadVideoInChunks } from "../../../../../utils/chunkedUpload";
 
 const CourseInformationForm = () => {
   const {
@@ -93,6 +94,7 @@ const CourseInformationForm = () => {
         const currentValues = getValues();
         // Create a new form data
         const formData = new FormData();
+        setLoading(true);
 
         // Add all the values in the formdata
         formData.append("courseId", course._id);
@@ -135,11 +137,20 @@ const CourseInformationForm = () => {
         }
 
         if (currentValues.courseImage !== course.thumbnail) {
-          formData.append("thumbnailImage", data.courseImage);
+          let thumbnail = data.courseImage;
+          if (thumbnail instanceof File) {
+            try {
+              thumbnail = await uploadVideoInChunks(thumbnail, token);
+            } catch (err) {
+              toast.error("Thumbnail update failed");
+              setLoading(false);
+              return;
+            }
+          }
+          formData.append("thumbnailImage", thumbnail);
         }
 
         // API call for edit course
-        setLoading(true);
         const result = await editCourseDetails(formData, token);
         setLoading(false);
 
@@ -154,6 +165,7 @@ const CourseInformationForm = () => {
     } else {
       // For creating a new course, reset state first
       dispatch(resetCourseState());
+      setLoading(true);
 
       // Prepare data for new course
       const formData = new FormData();
@@ -164,11 +176,21 @@ const CourseInformationForm = () => {
       formData.append("category", data.courseCategory);
       formData.append("instructions", JSON.stringify(data.courseRequirements));
       formData.append("tag", JSON.stringify(data.courseTags));
-      formData.append("thumbnailImage", data.courseImage);
       formData.append("status", COURSE_STATUS.DRAFT);
       formData.append("courseType", data.courseType);
 
-      setLoading(true);
+      let thumbnail = null;
+      if (data.courseImage instanceof File) {
+        try {
+          thumbnail = await uploadVideoInChunks(data.courseImage, token);
+        } catch (err) {
+          toast.error("Thumbnail upload failed");
+          setLoading(false);
+          return;
+        }
+      }
+      formData.append("thumbnailImage", thumbnail);
+
       const result = await addCourseDetails(formData, token);
       setLoading(false);
 

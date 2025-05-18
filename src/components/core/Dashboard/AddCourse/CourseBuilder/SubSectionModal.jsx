@@ -10,6 +10,7 @@ import { setCourse } from "../../../../../slices/courseSlice";
 import { RxCross2 } from "react-icons/rx";
 import CourseThumbnail from "../CourseInformation/CourseThumbnail";
 import Iconbtn from "../../../../../common/Iconbtn";
+import { uploadVideoInChunks } from "../../../../../utils/chunkedUpload";
 
 const SubSectionModal = ({
   modalData,
@@ -59,27 +60,34 @@ const SubSectionModal = ({
 
   const handleEditSubSection = async () => {
     const currentValues = getValues();
-    const formData = new FormData();
+    setLoading(true);
 
-    formData.append("sectionId", modalData.sectionId);
-    formData.append("subSectionId", modalData._id);
+    let uploadedVideoUrl = modalData.videoUrl;
 
-    if (currentValues.lectureVideo !== modalData.videoUrl) {
-      formData.append("video", currentValues.lectureVideo);
+    if (currentValues.lectureVideo instanceof File) {
+      try {
+        uploadedVideoUrl = await uploadVideoInChunks(
+          currentValues.lectureVideo,
+          token
+        );
+      } catch (err) {
+        toast.error("Video upload failed");
+        setLoading(false);
+        return;
+      }
     }
-    if (currentValues.lectureDesc !== modalData.description) {
-      formData.append("description", currentValues.lectureDesc);
-    }
-    if (currentValues.lectureTitle !== modalData.title) {
-      formData.append("title", currentValues.lectureTitle);
-    }
-    if (currentValues.lectureDuration !== modalData.duration) {
-      formData.append("duration", currentValues.lectureDuration);
-    }
+
+    const payload = {
+      sectionId: modalData.sectionId,
+      subSectionId: modalData._id,
+      title: currentValues.lectureTitle,
+      description: currentValues.lectureDesc,
+      duration: currentValues.lectureDuration,
+      videoUrl: uploadedVideoUrl,
+    };
 
     // API call
-    setLoading(true);
-    const result = await updateSubSection(formData, token);
+    const result = await updateSubSection(payload, token);
 
     if (result) {
       //   Here the api returns updated subsection
@@ -109,15 +117,30 @@ const SubSectionModal = ({
     }
 
     // Add Subsection
+    setLoading(true);
     const formdata = new FormData();
 
     formdata.append("sectionId", modalData);
     formdata.append("title", data.lectureTitle);
     formdata.append("description", data.lectureDesc);
-    formdata.append("video", data.lectureVideo);
+    // formdata.append("video", data.lectureVideo);
     formdata.append("duration", data.lectureDuration);
 
-    setLoading(true);
+    const currentValues = getValues();
+    let uploadedVideoUrl = modalData.videoUrl;
+    if (currentValues.lectureVideo instanceof File) {
+      try {
+        uploadedVideoUrl = await uploadVideoInChunks(
+          currentValues.lectureVideo,
+          token
+        );
+      } catch (err) {
+        toast.error("Video upload failed");
+        return;
+      }
+    }
+    formdata.append("videoUrl", uploadedVideoUrl);
+
     // api call
     const result = await createSubSection(formdata, token);
 
