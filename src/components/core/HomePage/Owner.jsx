@@ -37,16 +37,16 @@ const AnimatedTextLine = ({ children, index, scrollPosition }) => {
 const OwnerSection = () => {
   const [scrollPosition, setScrollPosition] = useState(0);
   const messages = [
-    `"When I started trading, I lost ₹5 lakhs in just 3 months - 
-     <span class="text-yellow-200"> I learned the hard way so you don't have to.</span>"`,
-    `"Our students have achieved
-     <span class="text-blue-200"> 80% consistency rate</span> in 
-     profitable trades through our structured approach."`,
-    `"Trading isn't gambling - it's a skill that can be
-     <span class="text-green-200"> systematically learned and mastered</span>."`,
-    `"Join our community of
-     <span class="text-caribbeangreen-200"> 10,000+ successful traders</span> 
-     who've transformed their financial lives."`,
+    `<span class="text-gradient-gold">Dear Trader,</span>`,
+    `Welcome to CNT Academy – not just an institute, but a movement to empower the modern trader.`,
+    `Every candlestick tells a story, every breakout hides opportunity, and every failure is a lesson in disguise. I’ve spent years decoding the language of charts, understanding the psychology of price, and living through every kind of market storm—bull, bear, sideways, and emotional.`,
+    `Here, we teach more than indicators - we train you to think like the market, act with precision, and manage risks like a pro.`,
+    `Let’s chart your growth, together.`,
+    `Because when you learn to read the market, you learn to read yourself.`,
+    `See you on the charts!`,
+    `With gratitude & guidance,`,
+    `<span class="text-gradient-gold">Vikash Bagaria</span>`,
+    `<span class="text-gradient-gold">Founder – CNT Academy</span>`,
   ];
 
   useEffect(() => {
@@ -72,7 +72,7 @@ const OwnerSection = () => {
       </div>
 
       {/* Owner's Message Container */}
-      <div className="lg:w-1/2 space-y-8 text-richblack-5 p-4">
+      <div className="lg:w-1/2 space-y-4 text-richblack-5 p-4">
         <h2 className="text-3xl font-bold mb-4 font-handwriting">
           Message from Vikash Bagaria
         </h2>
