@@ -21,6 +21,8 @@ const {
   LECTURE_COMPLETION_API,
   GET_COURSE_BY_TYPE,
   GET_COURSE_BY_STRATERGY,
+  GET_COURSES_BY_TAGS,
+  GET_COURSES_BY_CATEGORIES,
 } = courseEndpoints;
 
 export const getAllCourses = async () => {
@@ -421,4 +423,46 @@ export const getCourseByStratergy = async (courseType) => {
     toast.error(error.message);
   }
   return result;
+};
+
+// Get course by tags
+export const getCourseByTags = async (tagsArray) => {
+  let result = null;
+  try {
+    const query = tagsArray.join(",");
+    // Construct the endpoint with the courseType parameter
+    const response = await apiConnector(
+      "GET",
+      `${GET_COURSES_BY_TAGS}?tags=${query}`
+    );
+    console.log("GET_COURSES_BY_TAGS API RESPONSE............", response);
+    if (!response?.data?.success) {
+      throw new Error("Could Not Fetch Courses");
+    }
+    result = response.data.data; // Assuming the courses are returned here
+  } catch (error) {
+    console.log("GET_COURSES_BY_TAGS API ERROR............", error);
+    toast.error(error.message);
+  }
+  return result || [];
+};
+
+// Get course by categories
+export const getCourseByCategories = async (categories) => {
+  let result = null;
+  try {
+    // Construct the endpoint with the courseType parameter
+    const response = await apiConnector("POST", GET_COURSES_BY_CATEGORIES, {
+      categories,
+    });
+    console.log("GET_COURSES_BY_CATEGORIES API RESPONSE............", response);
+    if (!response?.data?.success) {
+      throw new Error("Could Not Fetch Courses");
+    }
+    result = response.data.data; // Assuming the courses are returned here
+  } catch (error) {
+    console.log("GET_COURSES_BY_CATEGORIES API ERROR............", error);
+    toast.error(error.message);
+  }
+  return result || [];
 };

@@ -48,4 +48,25 @@ export const sidebarLinks = [
     type: ACCOUNT_TYPE.USER,
     icon: "VscPackage",
   },
+  {
+    id: 7,
+    name: "My Blogs",
+    path: "/dashboard/blogs",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscBook",
+  },
+  {
+    id: 8,
+    name: "My Events",
+    path: "/dashboard/events",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscCalendar",
+  },
+  {
+    id: 9,
+    name: "Newsletter",
+    path: "/dashboard/newsletter",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscCommentDiscussion",
+  },
 ];

@@ -10,14 +10,6 @@ import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from "react-icons/fa";
 
 const BottomFooter = ["Privacy Policy", "Terms and Conditions"];
 
-const Resources = [
-  "Articles",
-  "Blog",
-  "Market Analysis",
-  "Videos",
-  "Free Newsletter",
-];
-
 const Plans = ["Paid Memberships", "For Students", "Business Solutions"];
 const Community = ["Forums", "Webinars", "Events"];
 const Company = [
@@ -68,7 +60,9 @@ const Footer = () => {
                       key={index}
                       className="text-sm cursor-pointer hover:text-richblack-50 transition-all duration-200"
                     >
-                      <Link to={element.split(" ").join("-").toLowerCase()}>
+                      <Link
+                        to={`/${element.split(" ").join("-").toLowerCase()}`}
+                      >
                         {element}
                       </Link>
                     </div>
@@ -116,7 +110,9 @@ const Footer = () => {
                       key={index}
                       className="text-sm cursor-pointer hover:text-richblack-50 transition-all duration-200"
                     >
-                      <Link to={element.split(" ").join("-").toLowerCase()}>
+                      <Link
+                        to={`/${element.split(" ").join("-").toLowerCase()}`}
+                      >
                         {element}
                       </Link>
                     </div>
@@ -168,7 +164,7 @@ const Footer = () => {
                   key={i}
                 >
                   <Link
-                    to={ele.split(" ").join("-").toLowerCase()}
+                    to={`/${ele.split(" ").join("-").toLowerCase()}`}
                     className="hover:text-richblack-50"
                   >
                     {ele}

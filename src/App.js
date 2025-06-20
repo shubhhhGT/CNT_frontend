@@ -10,7 +10,6 @@ import Signup from "./pages/Signup";
 import ForgotPassword from "./pages/ForgotPassword";
 import UpdatePassword from "./pages/UpdatePassword";
 import About from "./pages/About";
-// import About from "./components/core/SampleAbout/About";
 import Error from "./pages/Error";
 import Contact from "./pages/Contact";
 import Dashboard from "./pages/Dashboard";
@@ -30,12 +29,31 @@ import EnrolledCourses from "./components/core/Dashboard/EnrolledCourses";
 import TermsAndConditions from "./components/core/Footer/TermsAndConditions";
 import PrivacyPolicy from "./components/core/Footer/PrivacyPolicy";
 import VerifyEmail from "./pages/VerifyEmail";
+import ScrollToTop from "./utils/ScrollToTop";
+import QnAPage from "./components/core/Footer/QnA";
+import TestimonialsPage from "./components/core/Footer/Testimonial";
+import FaqPage from "./components/core/Footer/Faq";
+import BlogDetails from "./components/core/Footer/Blogs/BlogDetails";
+import AdminBlogs from "./components/core/Footer/Blogs/AdminBlogs";
+import EditBlog from "./components/core/Footer/Blogs/EditBlog";
+import AddBlog from "./components/core/Footer/Blogs/AddBlog";
+import AllBlogs from "./components/core/Footer/Blogs/AllBlogs";
+import ManageEvents from "./components/core/Footer/Events/ManageEvents";
+import CreateEvent from "./components/core/Footer/Events/CreateEvent";
+import EditEvent from "./components/core/Footer/Events/EditEvent";
+import EventDetails from "./components/core/Footer/Events/EventDetails";
+import AllEvents from "./components/core/Footer/Events/AllEvents";
+import TopicCoursesPage from "./components/core/Footer/topics/TopicCoursesPage";
+import NewsletterSignup from "./components/core/Footer/Newsletter/NewsletterSignup";
+import NewsletterSubscribers from "./components/core/Footer/Newsletter/NewsletterSubscribers";
+import CareerCoursesPage from "./components/core/Footer/topics/CareerCoursesPage";
 
 function App() {
   const { user } = useSelector((state) => state.profile);
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
       <Navbar />
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<Home />} />
 
@@ -44,6 +62,19 @@ function App() {
         <Route path="contact" element={<Contact />} />
         <Route path="catalog/:catalogName" element={<Catalog />} />
         <Route path="courses/:courseId" element={<CourseDetails />} />
+        <Route path="terms-and-conditions" element={<TermsAndConditions />} />
+        <Route path="privacy-policy" element={<PrivacyPolicy />} />
+        <Route path="qna-sessions" element={<QnAPage />} />
+        <Route path="testimonials" element={<TestimonialsPage />} />
+        <Route path="help-center" element={<FaqPage />} />
+        <Route path="/blogs" element={<AllBlogs />} />
+        <Route path="/forums" element={<AllBlogs />} />
+        <Route path="/blogs/:blogId" element={<BlogDetails />} />
+        <Route path="/events" element={<AllEvents />} />
+        <Route path="/events/:id" element={<EventDetails />} />
+        <Route path="/topics" element={<TopicCoursesPage />} />
+        <Route path="/newsletter" element={<NewsletterSignup />} />
+        <Route path="/career" element={<CareerCoursesPage />} />
 
         <Route
           path="login"
@@ -82,15 +113,6 @@ function App() {
         />
 
         <Route
-          path="about"
-          element={
-            <OpenRoute>
-              <About />
-            </OpenRoute>
-          }
-        />
-
-        <Route
           path="verify-email"
           element={
             <OpenRoute>
@@ -104,24 +126,6 @@ function App() {
           element={
             <OpenRoute>
               <Contact />
-            </OpenRoute>
-          }
-        />
-
-        <Route
-          path="terms-and-conditions"
-          element={
-            <OpenRoute>
-              <TermsAndConditions />
-            </OpenRoute>
-          }
-        />
-
-        <Route
-          path="privacy-policy"
-          element={
-            <OpenRoute>
-              <PrivacyPolicy />
             </OpenRoute>
           }
         />
@@ -150,6 +154,24 @@ function App() {
 
               <Route path="dashboard/add-course" element={<AddCourse />} />
               <Route path="dashboard/categories" element={<Category />} />
+              {/* Blogs */}
+              <Route path="dashboard/blogs" element={<AdminBlogs />} />
+              <Route path="dashboard/create-blog" element={<AddBlog />} />
+              <Route
+                path="dashboard/edit-blog/:blogId"
+                element={<EditBlog />}
+              />
+
+              {/* Events */}
+              <Route path="dashboard/events" element={<ManageEvents />} />
+              <Route path="dashboard/create-event" element={<CreateEvent />} />
+              <Route path="dashboard/edit-event/:id" element={<EditEvent />} />
+
+              {/* Newsletter */}
+              <Route
+                path="dashboard/newsletter"
+                element={<NewsletterSubscribers />}
+              />
 
               <Route
                 path="dashboard/instructor"

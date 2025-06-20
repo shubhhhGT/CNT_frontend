@@ -53,6 +53,8 @@ export const courseEndpoints = {
     BASE_URL + "/course/getFullCourseDetails",
   GET_COURSE_BY_TYPE: BASE_URL + "/course/getCoursesByType/:courseType",
   GET_COURSE_BY_STRATERGY: BASE_URL + "/course/getCoursesByStratergy",
+  GET_COURSES_BY_TAGS: BASE_URL + "/course/getCoursesByTags",
+  GET_COURSES_BY_CATEGORIES: BASE_URL + "/course/get-courses-by-categories",
 };
 
 // RATINGS AND REVIEWS
@@ -90,4 +92,40 @@ export const uploadEndpoints = {
   INITIATE_UPLOAD: BASE_URL + "/upload/initiate-upload",
   GENERATE_SIGNED_URL: BASE_URL + "/upload/generate-urls",
   COMPLETE_UPLOAD: BASE_URL + "/upload/complete-upload",
+};
+
+// QnA endpoints
+export const qnaEndpoints = {
+  GET_ALL_QUESTIONS: BASE_URL + "/qna/getAllQuestions",
+  ASK_QUESTION: BASE_URL + "/qna/ask",
+  ANSWER_QUESTION: BASE_URL + "/qna/answer",
+};
+
+// Testimonial endpoint
+export const testimonialEndpoints = {
+  GET_ALL_TESTIMONIALS: BASE_URL + "/testimonial/getAllTestimonials",
+};
+
+// Blog endpoints
+export const blogEndpoints = {
+  GET_ALL_BLOGS: BASE_URL + "/blog/all",
+  DELETE_BLOG: BASE_URL + "/blog/delete",
+  UPDATE_BLOG: BASE_URL + "/blog/update",
+  CREATE_BLOG: BASE_URL + "/blog/create",
+  GET_BLOG_BY_ID: BASE_URL + "/blog",
+};
+
+// Event endpoints
+export const eventEndpoints = {
+  GET_ALL_EVENTS: BASE_URL + "/event/all",
+  DELETE_EVENT: BASE_URL + "/event/delete",
+  UPDATE_EVENT: BASE_URL + "/event/update",
+  CREATE_EVENT: BASE_URL + "/event/create",
+  GET_EVENT_BY_ID: BASE_URL + "/event",
+};
+
+// Newsletter endpoints
+export const newsletterEndpoints = {
+  SUBSCRIBE_TO_NEWSLETTER: BASE_URL + "/newsletter/subscribe",
+  GET_ALL_SUBCRIBERS: BASE_URL + "/newsletter/subscribers",
 };
