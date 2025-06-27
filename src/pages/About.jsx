@@ -1,6 +1,5 @@
 import React from "react";
 import HighlightText from "../components/core/HomePage/HighlightText";
-import VikasBagariaMain from "../assets/Images/VikasBagariaMain.png";
 import bannerimage3 from "../assets/Images/aboutus3.webp";
 import Quote from "../components/core/AboutPage/Quote";
 import Stats from "../components/core/AboutPage/Stats";
@@ -93,17 +92,15 @@ const About = () => {
               <div className="text-3xl mt-4">
                 <HighlightText text={"Vikash Bagaria"} />
               </div>
-              <HighlightText text={"The SEBI-Registered Research Analyst"} />
               <HighlightText text={"Who Cracks the Code of Stock Trading!"} />
             </div>
 
             <div className="w-full md:w-[60%] font-semibold text-lg md:text-xl">
               <p className="text-richblack-5 text-center">
-                Founded by Vikash Bagaria, a seasoned market expert, SEBI
-                Registered Research Analyst(INH300008155), full-time trader,
-                mentor, and the brains behind Chartn Trade Academy – has helped
-                many traders & investors unlock REAL market secrets that work!
-                With 17+ years of experience in Technical & Fundamental
+                Founded by Vikash Bagaria, a seasoned market expert, full-time
+                trader, mentor, and the brains behind Chartn Trade Academy – has
+                helped many traders & investors unlock REAL market secrets that
+                work! With 17+ years of experience in Technical & Fundamental
                 Analysis, Vikash has cracked the formula behind stock movements,
                 options trading, and wealth-building strategies that the pros
                 don’t want you to know!

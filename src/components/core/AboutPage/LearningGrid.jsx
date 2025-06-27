@@ -8,8 +8,7 @@ const LearningGridArray = [
   {
     order: -1,
     heading: "Led by Vikash Bagaria - ",
-    highlightText:
-      "SEBI-Registered – 100% Legit, No Fake Gurus Here! with real market experience!",
+    highlightText: "No Fake Gurus Here! with real market experience!",
     description:
       "Tired of guessing in the stock market? Losing money on bad trades? Watching others make profits while you're stuck? It's time to change the game!",
     BtnText: "Learn More",
