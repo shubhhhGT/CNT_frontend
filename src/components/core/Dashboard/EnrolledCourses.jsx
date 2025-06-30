@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { getEnrolledCourses } from "../../../services/operations/profileAPI";
 import Spinner from "../../../common/Spinner";
 import ProgressBar from "@ramonak/react-progress-bar";
-import { useNavigate } from "react-router-dom";
 import { useMediaQuery } from "react-responsive";
 import { GoSidebarCollapse, GoSidebarExpand } from "react-icons/go";
 import Sidebar from "./Sidebar";
@@ -22,8 +21,6 @@ const EnrolledCourses = () => {
   const isMediumScreenOrLarger = useMediaQuery({ minWidth: 768 });
 
   const [sidebarIconClicked, setSidebarIconClicked] = useState(false);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     const getEnrolledCourse = async () => {
@@ -46,6 +43,7 @@ const EnrolledCourses = () => {
   const { totalItems } = useSelector((state) => state.cart);
   // Get cartItems
   // const [cartItemsArray, setCartItemsArray] = useState(null);
+  // eslint-disable-next-line
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -187,6 +185,25 @@ const EnrolledCourses = () => {
               </div>
             );
           })}
+
+          {/* 📱 Mobile App Message */}
+          <div className="mt-8 text-center">
+            <p className="text-richblack-5 text-sm sm:text-base">
+              Want to access your courses on the go?
+              <br />
+              <span className="font-semibold text-yellow-50">
+                Download our mobile app from the Play Store!
+              </span>
+            </p>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.cntacademy.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-block mt-2 text-blue-400 underline hover:text-blue-300 transition"
+            >
+              Open in Play Store
+            </a>
+          </div>
         </div>
       )}
     </div>

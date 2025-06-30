@@ -23,6 +23,7 @@ const {
   GET_COURSE_BY_STRATERGY,
   GET_COURSES_BY_TAGS,
   GET_COURSES_BY_CATEGORIES,
+  GET_STATS_DATA,
 } = courseEndpoints;
 
 export const getAllCourses = async () => {
@@ -462,6 +463,24 @@ export const getCourseByCategories = async (categories) => {
     result = response.data.data; // Assuming the courses are returned here
   } catch (error) {
     console.log("GET_COURSES_BY_CATEGORIES API ERROR............", error);
+    toast.error(error.message);
+  }
+  return result || [];
+};
+
+// Get stats data for about page
+export const getStatsData = async () => {
+  let result = null;
+  try {
+    // Construct the endpoint with the courseType parameter
+    const response = await apiConnector("GET", GET_STATS_DATA);
+    console.log("GET_STATS_DATA API RESPONSE............", response);
+    if (!response?.data?.success) {
+      throw new Error("Could Not Fetch Courses");
+    }
+    result = response.data.data; // Assuming the courses are returned here
+  } catch (error) {
+    console.log("GET_STATS_DATA API ERROR............", error);
     toast.error(error.message);
   }
   return result || [];

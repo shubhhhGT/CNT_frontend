@@ -58,7 +58,12 @@ const CourseInformationForm = () => {
       setValue("courseTags", course.tag);
       setValue("courseCategory", course.category);
       setValue("courseBenefits", course.whatYouWillLearn);
-      setValue("courseRequirements", course.instructions);
+      setValue(
+        "courseRequirements",
+        Array.isArray(course.instructions)
+          ? course.instructions
+          : JSON.parse(course.instructions || "[]")
+      );
       setValue("courseImage", course.thumbnail);
       setValue("courseType", course.courseType);
     }
@@ -374,6 +379,7 @@ const CourseInformationForm = () => {
         errors={errors}
         setValue={setValue}
         getValues={getValues}
+        editData={editCourse ? course?.instructions : []}
       />
 
       {/* Buttons */}

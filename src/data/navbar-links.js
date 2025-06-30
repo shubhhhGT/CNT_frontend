@@ -4,7 +4,7 @@ export const NavbarLinks = [
     path: "/",
   },
   {
-    title: "Catalog",
+    title: "Courses",
     // path: '/catalog',
   },
   {
@@ -18,5 +18,9 @@ export const NavbarLinks = [
   {
     title: "Knowledge Center",
     path: "/blogs",
+  },
+  {
+    title: "Plans",
+    path: "/plans",
   },
 ];

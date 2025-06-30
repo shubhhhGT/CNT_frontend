@@ -47,11 +47,20 @@ import TopicCoursesPage from "./components/core/Footer/topics/TopicCoursesPage";
 import NewsletterSignup from "./components/core/Footer/Newsletter/NewsletterSignup";
 import NewsletterSubscribers from "./components/core/Footer/Newsletter/NewsletterSubscribers";
 import CareerCoursesPage from "./components/core/Footer/topics/CareerCoursesPage";
+import CouponManager from "./components/core/Dashboard/Coupon/CouponManager";
+import AddCouponForm from "./components/core/Dashboard/Coupon/AddCouponForm";
+import CouponBanner from "./common/CouponBanner";
+import Plans from "./components/core/Footer/Plans/Plans";
+import PlanCourses from "./components/core/Footer/Plans/PlanCourses";
+import RefundPolicy from "./components/core/Footer/RefundPolicy";
+import GrievancePolicy from "./components/core/Footer/GrievancePolicy";
+import AllInvoices from "./components/core/Dashboard/AllInvoices";
 
 function App() {
   const { user } = useSelector((state) => state.profile);
   return (
     <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
+      <CouponBanner />
       <Navbar />
       <ScrollToTop />
       <Routes>
@@ -60,7 +69,7 @@ function App() {
         {/* Routes accessible for both logged-in and not-logged-in users */}
         <Route path="about" element={<About />} />
         <Route path="contact" element={<Contact />} />
-        <Route path="catalog/:catalogName" element={<Catalog />} />
+        <Route path="course/:catalogName" element={<Catalog />} />
         <Route path="courses/:courseId" element={<CourseDetails />} />
         <Route path="terms-and-conditions" element={<TermsAndConditions />} />
         <Route path="privacy-policy" element={<PrivacyPolicy />} />
@@ -75,6 +84,10 @@ function App() {
         <Route path="/topics" element={<TopicCoursesPage />} />
         <Route path="/newsletter" element={<NewsletterSignup />} />
         <Route path="/career" element={<CareerCoursesPage />} />
+        <Route path="/plans" element={<Plans />} />
+        <Route path="/plans/:id" element={<PlanCourses />} />
+        <Route path="/refund-policy" element={<RefundPolicy />} />
+        <Route path="/grievance-policy" element={<GrievancePolicy />} />
 
         <Route
           path="login"
@@ -172,6 +185,13 @@ function App() {
                 path="dashboard/newsletter"
                 element={<NewsletterSubscribers />}
               />
+
+              {/* Coupons */}
+              <Route path="dashboard/coupons" element={<CouponManager />} />
+              <Route path="dashboard/add-coupon" element={<AddCouponForm />} />
+
+              {/* Invoices */}
+              <Route path="dashboard/invoices" element={<AllInvoices />} />
 
               <Route
                 path="dashboard/instructor"

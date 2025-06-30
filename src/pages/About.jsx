@@ -8,6 +8,7 @@ import ContactFormSection from "../components/core/AboutPage/ContactFormSection"
 import Footer from "../common/Footer";
 import ReviewSlider from "../common/ReviewSlideer";
 import aboutBgImage from "../assets/Images/ROY_5001.jpeg";
+import BackgroundBanner from "../assets/Images/Coursebanner.png";
 import { motion } from "framer-motion";
 
 const About = () => {
@@ -15,7 +16,7 @@ const About = () => {
     <div className="text-white">
       {/* Section 1 */}
 
-      <section className="bg-richblack-700 relative min-h-[100vh]">
+      <section className="bg-richblack-700 relative min-h-[110vh]">
         {/* Background image with enhanced gradients */}
         <div
           className="absolute inset-0 z-0"
@@ -42,87 +43,88 @@ const About = () => {
           initial={{ opacity: 0, y: 50 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
-          className="relative w-11/12 max-w-maxContent mx-auto text-center z-10 pt-[70vh] pb-20"
+          className="relative w-11/12 max-w-maxContent mx-auto text-center z-10 pt-[100vh] pb-1"
         >
           <motion.header
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.2 }}
-            className="mx-auto text-2xl md:text-4xl font-semibold lg:w-[70%]"
+            className="mx-auto text-2xl md:text-4xl font-semibold lg:w-full"
           >
             Welcome to CNT Academy –
             <HighlightText
               text={"Your Ultimate Guide to Stock Market Success!"}
             />
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="mx-auto mt-3 text-center font-medium text-richblack-5 text-base md:text-xl lg:w-[95%]"
-            >
-              Welcome to <span className="text-richblack-5">CNT Academy</span>,
-              the{" "}
-              <span className="text-richblack-5">
-                #1 destination for financial education
-              </span>
-              , where you’ll discover the secrets of Technical & Fundamental
-              Analysis used by top traders and investors.
-            </motion.p>
           </motion.header>
         </motion.div>
       </section>
 
-      <section className="bg-richblack-900 pt-20">
-        <div className="relative w-11/12 max-w-maxContent mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="flex flex-col md:flex-row-reverse justify-between items-center gap-10 lg:gap-5"
-          >
-            <div className="w-full md:w-[35%] flex flex-col text-xl text-center">
-              <motion.img
-                initial={{ scale: 0.9 }}
-                whileInView={{ scale: 1 }}
-                transition={{ duration: 0.5 }}
-                src={bannerimage3}
-                alt="bannerImage"
-                className="rounded-lg shadow-xl"
-              />
-              <div className="text-3xl mt-4">
-                <HighlightText text={"Vikash Bagaria"} />
+      <section className="relative">
+        {/* Background Image with Gradient Overlay */}
+        <div
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url(${BackgroundBanner})`,
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+            opacity: 0.15,
+          }}
+        ></div>
+
+        {/* Admin intro section */}
+        <section className="bg-transparent relative pt-20 z-10">
+          <div className="relative w-11/12 max-w-maxContent mx-auto">
+            <motion.div
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6 }}
+              className="flex flex-col md:flex-row-reverse justify-between items-center gap-10 lg:gap-5"
+            >
+              <div className="w-full md:w-[35%] flex flex-col text-xl text-center">
+                <motion.img
+                  initial={{ scale: 0.9 }}
+                  whileInView={{ scale: 1 }}
+                  transition={{ duration: 0.5 }}
+                  src={bannerimage3}
+                  alt="bannerImage"
+                  className="rounded-lg shadow-xl"
+                />
+                <div className="text-3xl mt-4">
+                  <HighlightText text={"Vikash Bagaria"} />
+                </div>
+                <HighlightText text={"Who Cracks the Code of Stock Trading!"} />
               </div>
-              <HighlightText text={"Who Cracks the Code of Stock Trading!"} />
-            </div>
 
-            <div className="w-full md:w-[60%] font-semibold text-lg md:text-xl">
-              <p className="text-richblack-5 text-center">
-                Founded by Vikash Bagaria, a seasoned market expert, full-time
-                trader, mentor, and the brains behind Chartn Trade Academy – has
-                helped many traders & investors unlock REAL market secrets that
-                work! With 17+ years of experience in Technical & Fundamental
-                Analysis, Vikash has cracked the formula behind stock movements,
-                options trading, and wealth-building strategies that the pros
-                don’t want you to know!
-              </p>
-              <p className="text-center text-richblack-5 mt-6">
-                CNT Academy is here to transform YOU into a confident, pro
-                trader—no more gambling, no more uncertainty!
-              </p>
-              <p className="text-center text-richblack-5 mt-6">
-                It’s NOT luck. It’s skill, strategy, and market knowledge.
-              </p>
-            </div>
-          </motion.div>
-        </div>
-      </section>
+              <div className="w-full md:w-[60%] font-semibold text-lg md:text-xl">
+                <p className="text-richblack-5 text-center font-satisfy text-2xl">
+                  Founded by Vikash Bagaria, a seasoned market expert, full-time
+                  trader, mentor, and the brains behind Chartn Trade Academy –
+                  has helped many traders & investors unlock REAL market secrets
+                  that work! With 17+ years of experience in Technical &
+                  Fundamental Analysis, Vikash has cracked the formula behind
+                  stock movements, options trading, and wealth-building
+                  strategies that the pros don’t want you to know!
+                </p>
+                <p className="text-center text-richblack-5 mt-6 font-satisfy text-2xl">
+                  CNT Academy is here to transform YOU into a confident, pro
+                  trader—no more gambling, no more uncertainty!
+                </p>
+                <p className="text-center text-richblack-5 mt-6 font-satisfy text-2xl">
+                  It’s NOT luck. It’s skill, strategy, and market knowledge.
+                </p>
+              </div>
+            </motion.div>
+          </div>
+        </section>
 
-      {/* Section 2 */}
-      <section className="border-b border-richblack-700">
-        <div className="mx-auto flex flex-col justify-between gap-10 w-11/12 max-w-maxContent text-richblack-500">
-          <div className="h-[70px] md:h-[40px]"></div>
-          <Quote />
-        </div>
+        {/* Section 2 */}
+        <section className="border-b border-richblack-700 relative z-10">
+          <div className="mx-auto flex flex-col justify-between gap-10 w-11/12 max-w-maxContent text-richblack-500">
+            <div className="h-[70px] md:h-[40px]"></div>
+            <Quote />
+          </div>
+        </section>
       </section>
 
       {/* Section 3 */}
@@ -259,7 +261,7 @@ const About = () => {
       {/* Review slider */}
       <section className="w-11/12 mx-auto my-20 max-w-maxContent flex-col flex items-center justify-between gap-8 bg-richblack-900 text-white">
         <div className="text-center text-4xl font-semibold mt-10">
-          Reviews from Investors
+          Reviews from our Students
         </div>
         <ReviewSlider />
       </section>

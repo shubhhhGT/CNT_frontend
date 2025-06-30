@@ -7,6 +7,7 @@ const RequirementField = ({
   errors,
   setValue,
   getValues,
+  editData = [],
 }) => {
   const [requirement, setRequirement] = useState("");
   const [requirementList, setRequirementList] = useState([]);
@@ -19,23 +20,34 @@ const RequirementField = ({
   };
 
   const handleRemoveRequirement = (index) => {
-    const updatedRequirementList = [...requirementList];
-    updatedRequirementList.splice(index, 1);
-    setRequirementList(updatedRequirementList);
+    const updated = [...requirementList];
+    updated.splice(index, 1);
+    setRequirementList(updated);
   };
 
+  // Register field on mount
   useEffect(() => {
     register(name, {
       required: true,
       validate: (value) => value.length > 0,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [register, name]);
 
+  // Hydrate from editData
+  useEffect(() => {
+    if (
+      Array.isArray(editData) &&
+      editData.length > 0 &&
+      requirementList.length === 0
+    ) {
+      setRequirementList(editData);
+    }
+  }, [editData, requirementList.length]);
+
+  // Sync to form
   useEffect(() => {
     setValue(name, requirementList);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [requirementList]);
+  }, [requirementList, name, setValue]);
 
   return (
     <div className="flex flex-col space-y-2">
@@ -62,13 +74,13 @@ const RequirementField = ({
 
       {requirementList.length > 0 && (
         <ul className="mt-2 list-inside list-disc">
-          {requirementList.map((requirement, index) => (
-            <li key={index} className="flex items-center text-richblack-5">
-              <span>{requirement}</span>
+          {requirementList.map((req, idx) => (
+            <li key={idx} className="flex items-center text-richblack-5">
+              <span>{req}</span>
               <button
                 type="button"
                 className="ml-2 text-xs text-pure-greys-300"
-                onClick={() => handleRemoveRequirement(index)}
+                onClick={() => handleRemoveRequirement(idx)}
               >
                 clear
               </button>

@@ -55,6 +55,7 @@ export const courseEndpoints = {
   GET_COURSE_BY_STRATERGY: BASE_URL + "/course/getCoursesByStratergy",
   GET_COURSES_BY_TAGS: BASE_URL + "/course/getCoursesByTags",
   GET_COURSES_BY_CATEGORIES: BASE_URL + "/course/get-courses-by-categories",
+  GET_STATS_DATA: BASE_URL + "/course/getStatsData",
 };
 
 // RATINGS AND REVIEWS
@@ -128,4 +129,20 @@ export const eventEndpoints = {
 export const newsletterEndpoints = {
   SUBSCRIBE_TO_NEWSLETTER: BASE_URL + "/newsletter/subscribe",
   GET_ALL_SUBCRIBERS: BASE_URL + "/newsletter/subscribers",
+};
+
+// Coupon endpoints
+export const couponEndpoints = {
+  GET_ALL_COUPONS: BASE_URL + "/coupon/all",
+  DELETE_COUPON: BASE_URL + "/coupon/delete",
+  TOGGLE_COUPON_BANNER: BASE_URL + "/coupon/toggle-banner",
+  CREATE_COUPON: BASE_URL + "/coupon/create",
+  TOGGLE_COUPON_ACTIVE: BASE_URL + "/coupon/toggle-active",
+  GET_BANNER_COUPONS: BASE_URL + "/coupon/banner",
+  VALIDATE_COUPON: BASE_URL + "/coupon/validate",
+};
+
+// Invoice endpoints
+export const invoiceEndpoints = {
+  GET_ALL_INVOICES: BASE_URL + "/invoice/getAllInvoices",
 };

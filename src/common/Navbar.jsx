@@ -18,6 +18,8 @@ import useOnClickOutside from "../hooks/useOnClickOutside";
 import { ACCOUNT_TYPE } from "../utils/constants";
 import { getEntireCart } from "../services/operations/cartAPI";
 import { setTotalItems } from "../slices/cartSlice";
+import { LuBrain } from "react-icons/lu";
+import { FaChartLine } from "react-icons/fa";
 
 const Navbar = () => {
   const { token } = useSelector((state) => state.auth);
@@ -34,6 +36,7 @@ const Navbar = () => {
   // Using onClickOutside to handle state changes for clicking outside
   useOnClickOutside(ref, () => setIsNavbarCollapsed(true));
 
+  // eslint-disable-next-line
   const [cart, setCart] = useState(null);
   const dispatch = useDispatch();
 
@@ -96,7 +99,7 @@ const Navbar = () => {
             {NavbarLinks.map((ele, i) => {
               return (
                 <li key={i}>
-                  {ele.title === "Catalog" ? (
+                  {ele.title === "Courses" ? (
                     <div className="relative flex items-center gap-2 group ">
                       <p className="group-hover:cursor-pointer">{ele?.title}</p>
                       <SlArrowDown className="text-sm group-hover:cursor-pointer" />
@@ -107,7 +110,7 @@ const Navbar = () => {
                         ) : subLinks.length ? (
                           subLinks.map((subLink, i) => (
                             <Link
-                              to={`/catalog/${subLink.name
+                              to={`/course/${subLink.name
                                 .split(" ")
                                 .join("-")
                                 .toLowerCase()}`}
@@ -191,7 +194,7 @@ const Navbar = () => {
             {NavbarLinks.map((ele, i) => {
               return (
                 <li key={i} className="group">
-                  {ele.title === "Catalog" ? (
+                  {ele.title === "Courses" ? (
                     <div className="relative gap-x-2 flex items-center group mb-2 ">
                       <IoIosArrowBack className="group-hover:cursor-pointer" />
                       <p className="group-hover:cursor-pointer">{ele.title}</p>
@@ -202,7 +205,7 @@ const Navbar = () => {
                         ) : subLinks.length ? (
                           subLinks.map((subLink, i) => (
                             <Link
-                              to={`/catalog/${subLink.name
+                              to={`/course/${subLink.name
                                 .split(" ")
                                 .join("-")
                                 .toLowerCase()}`}
@@ -226,9 +229,11 @@ const Navbar = () => {
                       >
                         <span>
                           {ele.title === "Home" && <HiOutlineHome />}
-                          {ele.title === "Catalog" && <IoIosArrowBack />}
+                          {ele.title === "Courses" && <IoIosArrowBack />}
                           {ele.title === "About Us" && <HiUserGroup />}
                           {ele.title === "Contact Us" && <IoIosCall />}
+                          {ele.title === "Knowledge Center" && <LuBrain />}
+                          {ele.title === "Plans" && <FaChartLine />}
                         </span>
                         <p onClick={() => setIsNavbarCollapsed(true)}>
                           {ele.title}

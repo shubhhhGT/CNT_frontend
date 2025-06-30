@@ -3,7 +3,12 @@ import { AiOutlineDown } from "react-icons/ai";
 import { convertSecondsToDuration } from "../../../utils/convertToDuration";
 import SubSecAccordion from "./SubSecAccordion";
 
-const CourseAccordionBar = ({ course, isActive, handleActive }) => {
+const CourseAccordionBar = ({
+  course,
+  isActive,
+  handleActive,
+  sectionIndex,
+}) => {
   const [sectionTotalTime, setSectionTotalTime] = useState(0);
   const [active, setActive] = useState(false);
   const [sectionHeight, setSectionHeight] = useState(0);
@@ -12,6 +17,7 @@ const CourseAccordionBar = ({ course, isActive, handleActive }) => {
 
   useEffect(() => {
     setActive(isActive?.includes(course._id));
+    // eslint-disable-next-line
   }, [isActive]);
 
   useEffect(() => {
@@ -26,6 +32,7 @@ const CourseAccordionBar = ({ course, isActive, handleActive }) => {
     let convertedTime = convertSecondsToDuration(totalTime);
     setSectionTotalTime(convertedTime);
   }, [course]);
+
   return (
     <div className="border border-solid overflow-hidden border-richblack-600 bg-richblack-700 text-richblack-5 last:mb-0">
       <div
@@ -46,27 +53,28 @@ const CourseAccordionBar = ({ course, isActive, handleActive }) => {
 
         {/* Section time and total lecture */}
         <div className="flex space-x-4">
-          {/* total lecture for a section */}
-          <div className="text-yellow-25">{`${
-            course?.subSection.length || 0
-          } lecture(s)`}</div>
-          {/* Total time for a section */}
+          <div className="text-yellow-25">
+            {`${course?.subSection.length || 0} lecture(s)`}
+          </div>
           <div className="text-richblack-100">{sectionTotalTime}</div>
         </div>
       </div>
 
-      {/* Subsection */}
+      {/* Subsections */}
       <div
         ref={contentElement}
-        style={{
-          height: sectionHeight,
-        }}
+        style={{ height: sectionHeight }}
         className="h-0 overflow-hidden bg-richblack-900 transition-[height] duration-[0.35s] ease-[ease]"
       >
         <div className="flex flex-col gap-2 px-6 py-7 font-semibold">
-          {course?.subSection?.map((subSec, i) => {
-            return <SubSecAccordion subSec={subSec} key={i} />;
-          })}
+          {course?.subSection?.map((subSec, index) => (
+            <SubSecAccordion
+              key={index}
+              subSec={subSec}
+              index={index}
+              sectionIndex={sectionIndex}
+            />
+          ))}
         </div>
       </div>
     </div>

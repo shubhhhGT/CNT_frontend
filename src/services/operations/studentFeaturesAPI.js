@@ -30,7 +30,9 @@ export async function buyCourse(
   courses,
   userDetails,
   navigate,
-  dispatch
+  dispatch,
+  couponCode = null,
+  billingInfo = null
 ) {
   const toastId = toast.loading("Loading...");
   try {
@@ -48,7 +50,7 @@ export async function buyCourse(
     const orderResponse = await apiConnector(
       "POST",
       COURSE_PAYMENT_API,
-      { courses },
+      { courses, couponCode, billingInfo },
       { Authorization: `Bearer ${token}` }
     );
     console.log("order response", orderResponse);

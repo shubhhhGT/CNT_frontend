@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { buyCourse } from "../services/operations/studentFeaturesAPI";
@@ -11,7 +11,6 @@ import { HiOutlineGlobeAlt } from "react-icons/hi";
 import { BiInfoCircle } from "react-icons/bi";
 import CourseDetailsCard from "../components/core/Course/CourseDetailsCard";
 import ComnfirmationModal from "../common/ComnfirmationModal";
-import Markdown from "react-markdown";
 import Error from "./Error";
 import CourseAccordionBar from "../components/core/Course/CourseAccordionBar";
 import Footer from "../common/Footer";
@@ -20,6 +19,7 @@ import toast from "react-hot-toast";
 import { addTocart } from "../services/operations/cartAPI";
 import { setTotalItems } from "../slices/cartSlice";
 import ReviewSlider from "../common/ReviewSlideer";
+import { FaCheck } from "react-icons/fa";
 
 const CourseDetails = () => {
   const { token } = useSelector((state) => state.auth);
@@ -35,6 +35,9 @@ const CourseDetails = () => {
   const [confirmationModal, setConfirmationModal] = useState(null);
   let [totalNumberOfLectures, setTotalNumberOfLectures] = useState(0);
   const [isActive, setIsActive] = useState(Array(0));
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [appliedCoupon, setAppliedCoupon] = useState(null);
+  const contentRef = useRef(null);
 
   // Something extra start
   // Get cartItems
@@ -58,9 +61,18 @@ const CourseDetails = () => {
     );
   };
 
-  const handleBuyCourse = async () => {
+  // Adding details for course purchase
+  const handleBuyCourse = async (billingInfo) => {
     if (token) {
-      await buyCourse(token, [courseId], user, navigate, dispatch);
+      await buyCourse(
+        token,
+        [courseId],
+        user,
+        navigate,
+        dispatch,
+        appliedCoupon,
+        billingInfo
+      );
       return;
     }
     setConfirmationModal({
@@ -156,6 +168,12 @@ const CourseDetails = () => {
     createdAt,
     category,
   } = courseData?.data?.courseDetails;
+
+  const learnPoints = whatYouWillLearn
+    .split(".")
+    .map((point) => point.trim())
+    .filter((point) => point.length > 0)
+    .slice(0, -1);
 
   return (
     <>
@@ -253,6 +271,7 @@ const CourseDetails = () => {
               course={courseData?.data?.courseDetails}
               handleBuyCourse={handleBuyCourse}
               setConfirmationModal={setConfirmationModal}
+              setAppliedCoupon={setAppliedCoupon}
             />
           </div>
         </div>
@@ -261,11 +280,43 @@ const CourseDetails = () => {
       <div className="mx-auto box-content px-4 lg:w-[1260px] text-start text-richblack-5">
         <div className="mx-auto max-w-maxContentTab lg:mx-0 xl:max-w-[810px]">
           {/* What you will learn */}
-          <div className="my-8 border border-richblack-600 p-8">
-            <p className="text-3xl font-semibold">What you'll learn</p>
-            <div className="mt-5">
-              <Markdown>{whatYouWillLearn}</Markdown>
+          <div className="my-8 border border-richblack-600 px-6 pt-6 pb-2 relative overflow-hidden">
+            <p className="text-3xl font-semibold mb-5">What you'll learn</p>
+
+            {/* Collapsible content */}
+            <div
+              ref={contentRef}
+              className={`grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 transition-[max-height] duration-500 ease-in-out overflow-hidden`}
+              style={{
+                maxHeight: isExpanded
+                  ? `${contentRef.current?.scrollHeight}px`
+                  : "200px",
+              }}
+            >
+              {learnPoints.map((point, index) => (
+                <div
+                  key={index}
+                  className="flex items-start gap-3 text-richblack-100"
+                >
+                  <FaCheck className="text-caribbeangreen-400 mt-1 shrink-0" />
+                  <span>{point}.</span>
+                </div>
+              ))}
             </div>
+
+            {/* Gradient fade + Button */}
+            {!isExpanded && (
+              <div className="absolute bottom-0 left-0 w-full h-[80px] bg-gradient-to-t from-richblack-800 to-transparent pointer-events-none" />
+            )}
+
+            <span className="mt-3 flex justify-start">
+              <button
+                onClick={() => setIsExpanded((prev) => !prev)}
+                className="text-yellow-50 underline text-sm font-semibold z-10"
+              >
+                {isExpanded ? "Show Less" : "Show More"}
+              </button>
+            </span>
           </div>
 
           {/* Course Content Section */}
@@ -304,13 +355,14 @@ const CourseDetails = () => {
                 key={index}
                 isActive={isActive}
                 handleActive={handleActive}
+                sectionIndex={index}
               />
             ))}
           </div>
 
           {/* Author Details */}
           <div className="flex flex-col mb-12 py-4">
-            <p className="text-3xl font-semibold">Author</p>
+            <p className="text-3xl font-semibold">Mentor</p>
             <div className="flex gap-4 items-center py-4">
               <img
                 alt="Author"
@@ -332,7 +384,7 @@ const CourseDetails = () => {
 
       <section className="w-11/12 mx-auto my-20 max-w-maxContent flex-col flex items-center justify-between gap-8 bg-richblack-900 text-white">
         <div className="text-center text-4xl font-semibold mt-10">
-          Reviews from other learners
+          Reviews from our Students
         </div>
         <ReviewSlider />
       </section>

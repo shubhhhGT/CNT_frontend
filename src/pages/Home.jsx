@@ -251,7 +251,7 @@ const Home = () => {
             repeatType: "reverse",
           }}
         >
-          Reviews from Investors
+          Reviews from our Students
         </motion.h2>
         <ReviewSlider />
       </motion.div>

@@ -6,6 +6,7 @@ import { categories } from "../services/apis";
 import { getCatalogPageData } from "../services/operations/PageAndComponentData";
 import CourseSlider from "../components/core/Catalog/CourseSlider";
 import CourseCard from "../components/core/Catalog/Course_Card";
+import BannerImage from "../assets/Images/Coursebanner.png";
 
 const Catalog = () => {
   const { catalogName } = useParams();
@@ -47,19 +48,34 @@ const Catalog = () => {
     <>
       <div className="box-content bg-richblack-800 px-4">
         {/* Section 1 */}
-        <div className="mx-auto flex min-h-[260px] lg:max-w-maxContent flex-col justify-center gap-4 ">
-          <p className="text-sm text-richblack-300">
-            {`Home / Catalog / `}
-            <span className="text-yellow-25">
+        {/* Section 1 with banner image */}
+        <div className="relative w-full bg-richblack-800">
+          {/* Background image */}
+          <div className="absolute inset-0">
+            <img
+              src={BannerImage} // Replace with your banner image URL
+              alt="banner"
+              className="h-full w-full object-cover opacity-50"
+            />
+            {/* Optional dark overlay */}
+            <div className="absolute inset-0 bg-richblack-800 opacity-60"></div>
+          </div>
+
+          {/* Foreground content */}
+          <div className="relative z-10 mx-auto flex min-h-[260px] lg:max-w-maxContent flex-col justify-center gap-4 px-4">
+            <p className="text-sm text-richblack-300">
+              {`Home / Courses / `}
+              <span className="text-yellow-25">
+                {catalogPageData?.data?.selectedCategory?.name}
+              </span>
+            </p>
+            <p className="text-3xl text-richblack-5">
               {catalogPageData?.data?.selectedCategory?.name}
-            </span>
-          </p>
-          <p className="text-3xl text-richblack-5">
-            {catalogPageData?.data?.selectedCategory?.name}
-          </p>
-          <p className="max-w-[870px] text-richblack-200">
-            {catalogPageData?.data?.selectedCategory?.description}
-          </p>
+            </p>
+            <p className="max-w-[870px] text-richblack-200">
+              {catalogPageData?.data?.selectedCategory?.description}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -120,9 +136,9 @@ const Catalog = () => {
         <div className="py-8 mr-8 xl:mr-0">
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {catalogPageData?.data?.mostSellingCourses
-              ?.slice(0, 4)
+              ?.slice(0, 6)
               .map((course, index) => (
-                <CourseCard course={course} key={index} Height={"h-[400px]"} />
+                <CourseCard course={course} key={index} Height={"h-[250px]"} />
               ))}
           </div>
         </div>

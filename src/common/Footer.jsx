@@ -8,7 +8,12 @@ import Logo from "../assets/Logo/CNT-logo.png";
 // Icons
 import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from "react-icons/fa";
 
-const BottomFooter = ["Privacy Policy", "Terms and Conditions"];
+const BottomFooter = [
+  "Privacy Policy",
+  "Terms and Conditions",
+  "Refund Policy",
+  "Grievance Policy",
+];
 
 const Plans = ["Paid Memberships", "For Students", "Business Solutions"];
 const Community = ["Forums", "Webinars", "Events"];
@@ -91,9 +96,7 @@ const Footer = () => {
                       key={index}
                       className="text-sm cursor-pointer hover:text-richblack-50 transition-all duration-200"
                     >
-                      <Link to={element.split(" ").join("-").toLowerCase()}>
-                        {element}
-                      </Link>
+                      <Link to={"/plans"}>{element}</Link>
                     </div>
                   );
                 })}

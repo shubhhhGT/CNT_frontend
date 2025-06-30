@@ -69,4 +69,18 @@ export const sidebarLinks = [
     type: ACCOUNT_TYPE.ADMIN,
     icon: "VscCommentDiscussion",
   },
+  {
+    id: 10,
+    name: "Coupons",
+    path: "/dashboard/coupons",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscCreditCard",
+  },
+  {
+    id: 11,
+    name: "Invoices",
+    path: "/dashboard/invoices",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscChecklist",
+  },
 ];

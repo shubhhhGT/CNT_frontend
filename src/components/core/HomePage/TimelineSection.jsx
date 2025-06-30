@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Logo1 from "../../../assets/TimeLineLogo/Logo1.svg";
 import Logo2 from "../../../assets/TimeLineLogo/Logo2.svg";
 import Logo3 from "../../../assets/TimeLineLogo/Logo3.svg";
@@ -7,6 +7,7 @@ import timelineimage from "../../../assets/Images/TimelineImage.png";
 import { AnimatePresence, motion } from "framer-motion";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
+import { useNavigate } from "react-router-dom";
 
 const TimelineSection = () => {
   const Timeline = [
@@ -69,6 +70,7 @@ const TimelineSection = () => {
   ];
 
   const [expandedCard, setExpandedCard] = useState(null);
+  const navigate = useNavigate();
 
   // something extra
   // Hook to detect when the element is in view
@@ -127,6 +129,17 @@ const TimelineSection = () => {
                               {point}
                             </li>
                           ))}
+
+                          {/* Explore More button */}
+                          <div
+                            onClick={(e) => {
+                              e.stopPropagation(); // Prevent card collapse on button click
+                              navigate("/plans");
+                            }}
+                            className="inline-block mt-2 px-4 py-2 text-white bg-blue-600 rounded hover:bg-blue-700 transition"
+                          >
+                            Explore More
+                          </div>
                         </motion.ul>
                       )}
                     </AnimatePresence>

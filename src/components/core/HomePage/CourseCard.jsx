@@ -28,10 +28,10 @@ const CourseCard = ({ cardData, selectedCard, setSelectedCard }) => {
       selectedCard === cardData?.courseName
         ? "bg-white shadow-[12px_12px_0_0] shadow-yellow-50"
         : "bg-richblack-800"
-    } text-richblack-25 h-[350px] box-border cursor-pointer`}
+    } text-richblack-25 h-[380px] box-border cursor-pointer`}
       onClick={handleCardClick}
     >
-      <div className="flex flex-col gap-2 border-b-[2px] border-richblack-400 border-dashed h-[85%] p-4 lg:p-6 ">
+      <div className="flex flex-col gap-2 border-b-[2px] border-richblack-400 border-dashed h-[87%] p-4 lg:p-6 ">
         {/* Thumbnail */}
         {cardData?.thumbnail && (
           <img
