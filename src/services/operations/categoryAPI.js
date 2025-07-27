@@ -7,7 +7,7 @@ export function createCategory(data, setLoading, token) {
   setLoading(true);
   return async () => {
     try {
-      const response = await apiConnector(
+      await apiConnector(
         "POST",
         categoryEndpoints.ADD_CATEGORY_API,
         { name, description },
@@ -15,7 +15,7 @@ export function createCategory(data, setLoading, token) {
           Authorization: `Bearer ${token}`,
         }
       );
-      console.log("Create Category Response", response);
+
       toast.success("Request Sent");
     } catch (error) {
       console.log("ERROR MESSAGE...", error);

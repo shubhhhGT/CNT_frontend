@@ -15,6 +15,7 @@ import OwnerSection from "../components/core/HomePage/Owner";
 
 import { motion, useInView } from "framer-motion"; // New import
 import { useRef } from "react"; // New import
+import AppPromotionBanner from "../components/core/HomePage/AppPromotionBanner";
 
 const Home = () => {
   const { user } = useSelector((state) => state.profile);
@@ -255,6 +256,9 @@ const Home = () => {
         </motion.h2>
         <ReviewSlider />
       </motion.div>
+
+      {/* NEW: App Promotion Banner */}
+      <AppPromotionBanner />
 
       {/* Footer */}
       <Footer />

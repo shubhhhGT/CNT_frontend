@@ -11,8 +11,6 @@ export async function getAllBlogs() {
   try {
     const response = await apiConnector("GET", GET_ALL_BLOGS, null);
 
-    console.log("GET_ALL_BLOGS RESPONSE...", response);
-
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
@@ -33,8 +31,6 @@ export async function createBlog(data, token) {
     const response = await apiConnector("POST", CREATE_BLOG, data, {
       Authorization: `Bearer ${token}`,
     });
-
-    console.log("CREATE_BLOG RESPONSE...", response);
 
     if (!response.data.success) {
       throw new Error(response.data.message);
@@ -62,8 +58,6 @@ export async function updateBlog(updates, id, token) {
       }
     );
 
-    console.log("UPDATE_BLOG RESPONSE...", response);
-
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
@@ -90,8 +84,6 @@ export async function deleteBlog(id, token) {
       }
     );
 
-    console.log("DELETE_BLOG RESPONSE...", response);
-
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
@@ -110,8 +102,6 @@ export async function getBlogById(blogId) {
   let result = [];
   try {
     const response = await apiConnector("GET", `${GET_BLOG_BY_ID}/${blogId}`);
-
-    console.log("GET_BLOG_BY_ID RESPONSE...", response);
 
     if (!response.data.success) {
       throw new Error(response.data.message);

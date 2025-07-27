@@ -18,8 +18,6 @@ export async function getEnrolledCourses(token) {
       }
     );
 
-    console.log("GET_USER_ENROLLED_COURSES_API RESPONSE...", response);
-
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
@@ -40,8 +38,6 @@ export async function getInstructorData(token) {
     const response = await apiConnector("GET", GET_INSTRUCTOR_DATA_API, null, {
       Authorization: `Bearer ${token}`,
     });
-
-    console.log("GET_INSTRUCTOR_DATA_API RESPONSE...", response);
 
     if (!response.data.success) {
       throw new Error(response.data.message);

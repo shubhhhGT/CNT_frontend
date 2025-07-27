@@ -34,7 +34,6 @@ const EnrolledCourses = () => {
       setLoading(false);
     };
     getEnrolledCourse();
-    console.log("enrolledCourses", enrolledCourses);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -52,13 +51,11 @@ const EnrolledCourses = () => {
       try {
         // Fetch cart items
         const cartDetails = await getEntireCart(token);
-        console.log("cartDetails", cartDetails);
         // setCartItemsArray(cartDetails);
 
         // Check for common courses
         if (cartDetails && enrolledCourses) {
           let cart = cartDetails?.data?.data?.userDetails?.cartItems;
-          console.log("cart", cart);
           const commonCourse = cart.find((cartItem) => {
             return enrolledCourses.some(
               (course) => course._id === cartItem._id
@@ -66,7 +63,6 @@ const EnrolledCourses = () => {
           });
 
           if (commonCourse) {
-            console.log("Common Course", commonCourse);
             // Remove common course from cart
             await removeFromcart({ courseId: commonCourse }, token);
             dispatch(setTotalItems(totalItems - 1));

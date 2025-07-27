@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 import Logo from "../assets/Logo/CNT-logo.png";
 
 // Icons
-import { FaFacebook, FaGoogle, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaFacebook, FaInstagram, FaYoutube } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const BottomFooter = [
   "Privacy Policy",
@@ -46,10 +47,34 @@ const Footer = () => {
               </p>
 
               <div className="flex gap-3 text-lg ">
-                <FaFacebook className="hover:cursor-pointer hover:text-richblack-50" />
-                <FaGoogle className="hover:cursor-pointer hover:text-richblack-50" />
-                <FaTwitter className="hover:cursor-pointer hover:text-richblack-50" />
-                <FaYoutube className="hover:cursor-pointer hover:text-richblack-50" />
+                <a
+                  href="https://www.facebook.com/profile.php?id=61565847206124"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaFacebook className="hover:cursor-pointer hover:text-richblack-50" />
+                </a>
+                <a
+                  href="https://www.instagram.com/cntacademy01/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaInstagram className="hover:cursor-pointer hover:text-richblack-50" />
+                </a>
+                <a
+                  href="https://www.youtube.com/@cntacademy01"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaYoutube className="hover:cursor-pointer hover:text-richblack-50" />
+                </a>
+                <a
+                  href="https://x.com/cntacademy"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <FaXTwitter className="hover:cursor-pointer hover:text-richblack-50" />
+                </a>
               </div>
             </div>
 

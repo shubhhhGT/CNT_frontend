@@ -53,7 +53,6 @@ export async function buyCourse(
       { courses, couponCode, billingInfo },
       { Authorization: `Bearer ${token}` }
     );
-    console.log("order response", orderResponse);
 
     if (!orderResponse.data.success) {
       throw new Error(orderResponse.data.message);
@@ -84,8 +83,6 @@ export async function buyCourse(
       },
     };
 
-    console.log("options", options);
-
     // Initialize razorpay with options
     const razorpay = new window.Razorpay(options);
 
@@ -96,7 +93,6 @@ export async function buyCourse(
       console.log(response.error);
     });
   } catch (error) {
-    console.log("COURSE_PAYMENT_API ERROR...", error);
     toast.error("Could not make payment");
   }
   toast.dismiss(toastId);
@@ -116,9 +112,7 @@ async function sendPaymentSuccessEmail(response, amount, token) {
         Authorization: `Bearer ${token}`,
       }
     );
-  } catch (error) {
-    console.log("SEND_PAYMENT_SUCCESS_EMAIL_API ERROR...", error);
-  }
+  } catch (error) {}
 }
 
 // Verify payment
@@ -140,7 +134,6 @@ async function verifyPayment(bodyData, token, navigate, dispatch) {
 
     // dispatch(resetCart());
   } catch (error) {
-    console.log("COURSE_VERIFY_API ERROR...", error);
     toast.error("Could not verify payment");
   }
   toast.dismiss(toastId);

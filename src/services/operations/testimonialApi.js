@@ -10,8 +10,6 @@ export async function getAllTestimonials() {
   try {
     const response = await apiConnector("GET", GET_ALL_TESTIMONIALS, null);
 
-    console.log("GET_ALL_TESTIMONIALS RESPONSE...", response);
-
     if (!response.data.success) {
       throw new Error(response.data.message);
     }

@@ -20,8 +20,6 @@ const UpdatePassword = () => {
   const [showNewPassword, setShowNewPassword] = useState(false);
 
   const submitUpdatePasswordForm = async (formData) => {
-    console.log(formData);
-    console.log("Form Submitted with data");
     try {
       await changePassword(token, formData);
     } catch (error) {

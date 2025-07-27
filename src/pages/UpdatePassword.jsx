@@ -39,7 +39,6 @@ const UpdatePassword = () => {
       resetPassword(password, confirmPassword, otp, setPassResetComplete)
     );
     dispatch(getUser(otp)).then((userEmail) => {
-      console.log("User email:", userEmail);
       setEmail(userEmail);
     });
   };

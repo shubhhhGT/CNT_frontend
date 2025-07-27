@@ -22,7 +22,6 @@ const ChangeProfilePic = () => {
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    console.log(file);
     setImageFile(file);
     previewFile(file);
   };

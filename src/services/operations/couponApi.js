@@ -20,8 +20,6 @@ export async function getAllCoupons(token) {
       Authorization: `Bearer ${token}`,
     });
 
-    console.log("GET_ALL_COUPONS RESPONSE...", response);
-
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
@@ -42,8 +40,6 @@ export async function createCoupon(data, token) {
     const response = await apiConnector("POST", CREATE_COUPON, data, {
       Authorization: `Bearer ${token}`,
     });
-
-    console.log("CREATE_COUPON RESPONSE...", response);
 
     if (!response.data.success) {
       throw new Error(response.data.message);
@@ -71,8 +67,6 @@ export async function toggleCouponActive(id, isActive, token) {
       }
     );
 
-    console.log("TOGGLE_COUPON_ACTIVE RESPONSE...", response);
-
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
@@ -98,8 +92,6 @@ export async function deleteCoupon(id, token) {
         Authorization: `Bearer ${token}`,
       }
     );
-
-    console.log("DELETE_COUPON RESPONSE...", response);
 
     if (!response.data.success) {
       throw new Error(response.data.message);
@@ -127,8 +119,6 @@ export async function toggleCouponBanner(id, showOnBanner, token) {
       }
     );
 
-    console.log("TOGGLE_COUPON_BANNER RESPONSE...", response);
-
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
@@ -147,8 +137,6 @@ export async function getBannerCoupons() {
   let result = [];
   try {
     const response = await apiConnector("GET", GET_BANNER_COUPONS);
-
-    console.log("GET_BANNER_COUPONS RESPONSE...", response);
 
     if (!response.data.success) {
       throw new Error(response.data.message);
@@ -170,8 +158,6 @@ export async function validateCoupon(code) {
     const response = await apiConnector("POST", VALIDATE_COUPON, {
       name: code,
     });
-
-    console.log("VALIDATE_COUPON RESPONSE...", response);
 
     if (!response.data.success) {
       throw new Error(response.data.message);

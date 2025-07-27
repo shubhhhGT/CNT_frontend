@@ -17,7 +17,6 @@ export const addTocart = async (courseId, token) => {
       throw new Error(response.data.message);
     }
 
-    console.log("ADD_TO_CART RESPONSE...", response);
     toast.success("Course Added To Cart");
     res = true;
   } catch (error) {
@@ -39,7 +38,6 @@ export const removeFromcart = async (courseId, token) => {
       throw new Error(response.data.message);
     }
 
-    console.log("REMOVE_FROM_CART RESPONSE...", response);
     toast.success("Course Removed from Cart");
   } catch (error) {
     console.log(error);
@@ -60,7 +58,7 @@ export const getEntireCart = async (token) => {
       throw new Error(response.data.message);
     }
     cart = response;
-    console.log("GET_ENTIRE_CART RESPONSE...", response);
+
     return cart;
   } catch (error) {
     console.log("GET_ENTIRE_CART ERROR", error);
@@ -78,8 +76,6 @@ export const resetCart = async (token) => {
     if (!response) {
       throw new Error(response.data.message);
     }
-
-    console.log("RESET_CART RESPONSE...", response);
   } catch (error) {
     console.log(error.message);
   }

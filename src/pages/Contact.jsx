@@ -5,6 +5,7 @@ import { IoIosCall } from "react-icons/io";
 import ContactUsForm from "../common/ContactUsForm";
 import Footer from "../common/Footer";
 import ReviewSlider from "../common/ReviewSlideer";
+import AppPromotionBanner from "../components/core/HomePage/AppPromotionBanner";
 
 const Contact = () => {
   return (
@@ -52,7 +53,7 @@ const Contact = () => {
                 </p>
               </div>
               <div className="font-medium">Mon - Fri From 8am to 5pm</div>
-              <div className="font-semibold">+91 7439759090</div>
+              <div className="font-semibold">+91 7384708366</div>
             </div>
           </div>
 
@@ -90,6 +91,9 @@ const Contact = () => {
         </div>
         <ReviewSlider />
       </section>
+
+      {/* NEW: App Promotion Banner */}
+      <AppPromotionBanner />
 
       {/* Footer */}
       <Footer />

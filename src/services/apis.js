@@ -56,6 +56,8 @@ export const courseEndpoints = {
   GET_COURSES_BY_TAGS: BASE_URL + "/course/getCoursesByTags",
   GET_COURSES_BY_CATEGORIES: BASE_URL + "/course/get-courses-by-categories",
   GET_STATS_DATA: BASE_URL + "/course/getStatsData",
+  UPDATE_STATS_DATA: BASE_URL + "/course/updateStats",
+  GET_ALL_CERTIFICATES: BASE_URL + "/course/getAllCertificates",
 };
 
 // RATINGS AND REVIEWS

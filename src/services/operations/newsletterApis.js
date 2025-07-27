@@ -12,8 +12,6 @@ export async function getAllSubscribers(token) {
       Authorization: `Bearer ${token}`,
     });
 
-    console.log("GET_ALL_SUBCRIBERS RESPONSE...", response);
-
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
@@ -36,8 +34,6 @@ export async function subscribeToNewsletter(formdata) {
       SUBSCRIBE_TO_NEWSLETTER,
       formdata
     );
-
-    console.log("SUBSCRIBE_TO_NEWSLETTER RESPONSE...", response);
 
     if (!response.data.success) {
       throw new Error(response.data.message);

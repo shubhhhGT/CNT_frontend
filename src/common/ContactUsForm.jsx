@@ -15,7 +15,6 @@ const ContactUsForm = () => {
 
   const submitContactForm = async (data) => {
     await contactUs(data, setLoading)();
-    // console.log("MAIL SENT");
   };
 
   useEffect(() => {

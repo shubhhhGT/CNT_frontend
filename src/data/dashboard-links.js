@@ -83,4 +83,18 @@ export const sidebarLinks = [
     type: ACCOUNT_TYPE.ADMIN,
     icon: "VscChecklist",
   },
+  {
+    id: 12,
+    name: "Certificates",
+    path: "/dashboard/certificates",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscClippy",
+  },
+  {
+    id: 13,
+    name: "Update Stats",
+    path: "/dashboard/updateStats",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscBroadcast",
+  },
 ];

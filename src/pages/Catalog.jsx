@@ -18,12 +18,10 @@ const Catalog = () => {
   useEffect(() => {
     const getCategories = async () => {
       const res = await apiConnector("GET", categories.CATEGORIES_API);
-      //   console.log(res);
       const category_id = res?.data?.allCategories?.filter(
         (category) =>
           category.name.split(" ").join("-").toLowerCase() === catalogName
       )[0]._id;
-      //   console.log(category_id);
       setCategoryId(category_id);
     };
     getCategories();

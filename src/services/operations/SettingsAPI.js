@@ -20,8 +20,6 @@ export function updateProfiepicture(token, formData) {
         }
       );
 
-      console.log("UPDATE_PROFILE_PICTURE_API RESPONSE...", response);
-
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
@@ -43,8 +41,6 @@ export function updateProfile(token, formData) {
       const response = await apiConnector("PUT", UPDATE_PROFILE_API, formData, {
         Authorization: `Bearer ${token}`,
       });
-
-      console.log("UPDATE_PROFILE_API RESPONSE...", response);
 
       if (!response.data.success) {
         throw new Error(response.data.message);
@@ -71,8 +67,6 @@ export async function changePassword(token, formData) {
     const response = await apiConnector("PUT", CHANGE_PASSWORD_API, formData, {
       Authorization: `Bearer ${token}`,
     });
-
-    console.log("CHANGE_PASSWORD_API RESPONSE...", response);
 
     if (!response.data.success) {
       throw new Error(response.data.message);

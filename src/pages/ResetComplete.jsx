@@ -7,13 +7,8 @@ import { passUpdateEmail } from "../services/operations/authAPI";
 
 const ResetComplete = ({ email }) => {
   const { loading } = useSelector((state) => state.auth);
-  console.log(email);
 
   const dispatch = useDispatch();
-
-  // const handleOnClick = (e) => {
-  //     dispatch(passUpdateEmail(email));
-  // }
 
   useEffect(() => {
     dispatch(passUpdateEmail(email));

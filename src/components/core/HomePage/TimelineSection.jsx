@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Logo1 from "../../../assets/TimeLineLogo/Logo1.svg";
 import Logo2 from "../../../assets/TimeLineLogo/Logo2.svg";
 import Logo3 from "../../../assets/TimeLineLogo/Logo3.svg";
 import Logo4 from "../../../assets/TimeLineLogo/Logo4.svg";
-import timelineimage from "../../../assets/Images/TimelineImage.png";
+import timelineimage from "../../../assets/Images/TimelineImage12.png";
 import { AnimatePresence, motion } from "framer-motion";
 import CountUp from "react-countup";
 import { useInView } from "react-intersection-observer";
 import { useNavigate } from "react-router-dom";
+import { getStatsData } from "../../../services/operations/courseDetailsAPI";
 
 const TimelineSection = () => {
   const Timeline = [
@@ -70,6 +71,20 @@ const TimelineSection = () => {
   ];
 
   const [expandedCard, setExpandedCard] = useState(null);
+  const [stats, setStats] = useState(null);
+
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const res = await getStatsData();
+        setStats(res);
+      } catch (err) {
+        console.error("Failed to fetch stats:", err);
+      }
+    };
+
+    fetchStats();
+  }, []);
   const navigate = useNavigate();
 
   // something extra
@@ -176,17 +191,19 @@ const TimelineSection = () => {
             <div className="flex items-center gap-5 lg:px-14 px-7">
               {/* <p className="text-3xl font-bold w-[75px]">250</p> */}
               <p className="text-3xl font-bold w-[75px]">
-                {inView && <CountUp start={0} end={250} duration={2} />}
+                {inView && stats?.totalCourses && (
+                  <CountUp start={0} end={stats.totalCourses} duration={2} />
+                )}
                 {"+"}
               </p>
               <p className="text-sm text-caribbeangreen-300 w-[75px]">
-                Types of Courses
+                Courses
               </p>
             </div>
           </div>
           {/* Timeline image */}
           <img
-            className="shadow-white shadow-[20px_20px_0px_0px] object-cover h-[400px] lg:h-fit"
+            className="shadow-white shadow-[10px_10px_0px_0px] object-fill h-[400px] lg:h-fit"
             src={timelineimage}
             alt="timelineimage"
           />

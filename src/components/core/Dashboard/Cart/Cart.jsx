@@ -75,7 +75,6 @@ const Cart = () => {
       setLoading(true);
       try {
         const cartData = await getEntireCart(token);
-        // console.log("cartData", cartData);
         setCart(cartData);
         dispatch(setTotalItems(cartData?.data?.data?.totalItems));
       } catch (error) {

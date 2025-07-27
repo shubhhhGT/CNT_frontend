@@ -37,7 +37,7 @@ const faqs = [
       },
       {
         q: "Do you provide live market training?",
-        a: "Yes, advanced courses include real-time market sessions.",
+        a: "No, as per SEBI Norms training will be on 3 Months Back Data.",
       },
       {
         q: "Will I receive a certification?",
@@ -101,7 +101,7 @@ const faqs = [
     questions: [
       {
         q: "How to reach CNT Academy?",
-        a: "📧 Email: info@cntacademy.com\n📞 Phone: 7439759090\n🌍 Website: www.cntacademy.com",
+        a: "📧 Email: info@cntacademy.com\n📞 Phone: 7384708366\n🌍 Website: www.cntacademy.com",
       },
       {
         q: "Where can I follow CNT Academy?",

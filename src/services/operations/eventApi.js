@@ -16,8 +16,6 @@ export async function getAllEvents() {
   try {
     const response = await apiConnector("GET", GET_ALL_EVENTS, null);
 
-    console.log("GET_ALL_EVENTS RESPONSE...", response);
-
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
@@ -38,8 +36,6 @@ export async function createEvent(data, token) {
     const response = await apiConnector("POST", CREATE_EVENT, data, {
       Authorization: `Bearer ${token}`,
     });
-
-    console.log("CREATE_EVENT RESPONSE...", response);
 
     if (!response.data.success) {
       throw new Error(response.data.message);
@@ -67,8 +63,6 @@ export async function updateEvent(updates, id, token) {
       }
     );
 
-    console.log("UPDATE_EVENT RESPONSE...", response);
-
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
@@ -95,8 +89,6 @@ export async function deleteEvent(id, token) {
       }
     );
 
-    console.log("DELETE_EVENT RESPONSE...", response);
-
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
@@ -115,8 +107,6 @@ export async function getEventById(id) {
   let result = [];
   try {
     const response = await apiConnector("GET", `${GET_EVENT_BY_ID}/${id}`);
-
-    console.log("GET_EVENT_BY_ID RESPONSE...", response);
 
     if (!response.data.success) {
       throw new Error(response.data.message);

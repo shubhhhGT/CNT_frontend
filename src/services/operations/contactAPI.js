@@ -7,12 +7,15 @@ export function contactUs(data, setLoading) {
   setLoading(true);
   return async () => {
     try {
-      const response = await apiConnector(
-        "POST",
-        contactUsEndpoint.CONTACT_US_API,
-        { email, firstName, lastName, message, phoneNo, countrycode }
-      );
-      console.log("Contact Response", response);
+      await apiConnector("POST", contactUsEndpoint.CONTACT_US_API, {
+        email,
+        firstName,
+        lastName,
+        message,
+        phoneNo,
+        countrycode,
+      });
+
       toast.success("Request Sent");
     } catch (error) {
       console.log("ERROR MESSAGE...", error);

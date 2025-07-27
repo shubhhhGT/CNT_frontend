@@ -24,10 +24,6 @@ export function sendOtp(email, navigate) {
         email,
       });
 
-      console.log("SENDOTP API RESPONSE..........", response);
-
-      console.log(response.data.success);
-
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
@@ -66,8 +62,6 @@ export function signup(
         otp,
       });
 
-      console.log("SIGNUP API RESPONSE........", response);
-
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
@@ -97,8 +91,6 @@ export function login(email, password, navigate) {
         email,
         password,
       });
-
-      console.log("LOGIN API RESPONSE.........", response);
 
       // Throw error in case response is not received successfully
       if (!response.data.success) {
@@ -154,8 +146,6 @@ export function getPasswordResetToken(email, setEmailSent) {
         email,
       });
 
-      console.log("RESET PASSWORD TOKEN RESPONSE...", response);
-
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
@@ -185,8 +175,6 @@ export function resetPassword(
         resetPasswordToken,
       });
 
-      console.log("RESET PASSWORD RESPONSE...", response);
-
       if (!response.data.success) {
         throw new Error(response.data.message);
       }
@@ -208,8 +196,6 @@ export function getUser(resetPasswordToken) {
       const response = await apiConnector("POST", GETUSER_API, {
         resetPasswordToken,
       });
-
-      console.log("GET USER FROM TOKEN RESPONSE...", response);
 
       if (!response.data.success) {
         throw new Error(response.data.message);
@@ -233,8 +219,6 @@ export function passUpdateEmail(email) {
       const response = await apiConnector("POST", SENDPASSRESETEMAIL_API, {
         email,
       });
-
-      console.log("PASSWORD UPDATE EMAIL RESPONSE...", response);
 
       if (!response.data.success) {
         throw new Error(response.data.message);

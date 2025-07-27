@@ -15,13 +15,13 @@ const ExploreMore = () => {
   const [currentTab, setCurrentTab] = useState(tabNames[0]);
   const [courses, setCourses] = useState([]);
   const [selectedCard, setSelectedCard] = useState(null);
+  // eslint-disable-next-line
   const [loading, setLoading] = useState(false);
 
   const fetchCourses = async (courseType) => {
     setLoading(true);
     try {
       const allCourses = await getCourseBytype(courseType);
-      console.log("api response", allCourses);
       if (allCourses) {
         setCourses(allCourses);
         setSelectedCard(allCourses[0].courseName); // Assuming the API returns a similar structure
@@ -45,6 +45,7 @@ const ExploreMore = () => {
   useEffect(() => {
     // Fetch courses initially for the default tab
     fetchCourses(currentTab);
+    // eslint-disable-next-line
   }, []);
 
   return (

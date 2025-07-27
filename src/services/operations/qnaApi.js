@@ -10,8 +10,6 @@ export async function getAllQuestions() {
   try {
     const response = await apiConnector("GET", GET_ALL_QUESTIONS, null);
 
-    console.log("GET_ALL_QUESTIONS RESPONSE...", response);
-
     if (!response.data.success) {
       throw new Error(response.data.message);
     }
@@ -33,8 +31,6 @@ export async function askQuestion(title, description) {
       title,
       description,
     });
-
-    console.log("ASK_QUESTION RESPONSE...", response);
 
     if (!response.data.success) {
       throw new Error(response.data.message);
@@ -64,8 +60,6 @@ export async function answerQuestion({ questionId, content }, token) {
         Authorization: `Bearer ${token}`,
       }
     );
-
-    console.log("ANSWER_QUESTION RESPONSE...", response);
 
     if (!response.data.success) {
       throw new Error(response.data.message);

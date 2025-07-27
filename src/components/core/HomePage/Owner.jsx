@@ -1,6 +1,5 @@
 // components/core/HomePage/OwnerVideoSection.jsx
 import { useState, useEffect, useRef } from "react";
-import Banner from "../../../assets/Images/banner.mp4";
 
 const AnimatedTextLine = ({ children, index, scrollPosition }) => {
   const [isHighlighted, setIsHighlighted] = useState(false);
@@ -60,15 +59,18 @@ const OwnerSection = () => {
 
   return (
     <div className="flex flex-col lg:flex-row gap-12 items-center mx-3 my-7">
+      {/* YouTube Video Embed */}
       <div className="w-full lg:w-1/2">
-        <video
-          className="w-full rounded-xl shadow-[10px_-5px_50px_-5px] shadow-blue-200"
-          muted
-          loop
-          autoPlay
-        >
-          <source src={Banner} type="video/mp4" />
-        </video>
+        <div className="relative pb-[56.25%] h-0 rounded-xl overflow-hidden shadow-[10px_-5px_50px_-5px] shadow-blue-200">
+          <iframe
+            className="absolute top-0 left-0 w-full h-full"
+            src="https://www.youtube.com/embed/7oMbFXYXEYU?autoplay=0&mute=1&rel=0"
+            title="CNT Academy Introduction"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
+        </div>
       </div>
 
       {/* Owner's Message Container */}

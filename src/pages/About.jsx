@@ -10,6 +10,7 @@ import ReviewSlider from "../common/ReviewSlideer";
 import aboutBgImage from "../assets/Images/ROY_5001.jpeg";
 import BackgroundBanner from "../assets/Images/Coursebanner.png";
 import { motion } from "framer-motion";
+import AppPromotionBanner from "../components/core/HomePage/AppPromotionBanner";
 
 const About = () => {
   return (
@@ -268,6 +269,9 @@ const About = () => {
       {/* <div className="w-11/12 mx-auto ">
         <ReviewSlider />
       </div> */}
+
+      {/* NEW: App Promotion Banner */}
+      <AppPromotionBanner />
 
       {/* Footer */}
       <Footer />

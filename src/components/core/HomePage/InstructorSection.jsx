@@ -1,5 +1,5 @@
 import React from "react";
-import instructor from "../../../assets/Images/Instructor.png";
+import instructor from "../../../assets/Images/Instructor1.png";
 import HighlightText from "./HighlightText";
 import CTAButton from "./Button";
 import { FaArrowRight } from "react-icons/fa";
@@ -15,7 +15,7 @@ const InstructorSection = () => {
           <img
             src={instructor}
             alt="instructor_image"
-            className="shadow-white shadow-[-20px_-20px_0_0]"
+            className="shadow-white shadow-[-10px_-10px_0_0]"
           />
         </div>
 

@@ -55,6 +55,8 @@ import PlanCourses from "./components/core/Footer/Plans/PlanCourses";
 import RefundPolicy from "./components/core/Footer/RefundPolicy";
 import GrievancePolicy from "./components/core/Footer/GrievancePolicy";
 import AllInvoices from "./components/core/Dashboard/AllInvoices";
+import AllCertificates from "./components/core/Dashboard/AllCertificates";
+import SocialMediaStats from "./components/core/Dashboard/SocialMediaStats";
 
 function App() {
   const { user } = useSelector((state) => state.profile);
@@ -192,6 +194,18 @@ function App() {
 
               {/* Invoices */}
               <Route path="dashboard/invoices" element={<AllInvoices />} />
+
+              {/* Certificates */}
+              <Route
+                path="dashboard/certificates"
+                element={<AllCertificates />}
+              />
+
+              {/* Social Media stats */}
+              <Route
+                path="dashboard/updateStats"
+                element={<SocialMediaStats />}
+              />
 
               <Route
                 path="dashboard/instructor"
