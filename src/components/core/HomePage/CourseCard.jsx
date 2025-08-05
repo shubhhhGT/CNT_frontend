@@ -47,7 +47,7 @@ const CourseCard = ({ cardData, selectedCard, setSelectedCard }) => {
             selectedCard === cardData?.courseName && "text-richblack-800"
           } font-semibold text-[16px] md:text-[18px]`}
         >
-          {cardData?.courseName}
+          {truncateDescription(cardData?.courseName, 50)}
         </div>
         {/* Sub heading */}
         <div className="text-richblack-400">

@@ -24,7 +24,7 @@ const ExploreMore = () => {
       const allCourses = await getCourseBytype(courseType);
       if (allCourses) {
         setCourses(allCourses);
-        setSelectedCard(allCourses[0].courseName); // Assuming the API returns a similar structure
+        setSelectedCard(allCourses[0]?.courseName || null);
       } else {
         setCourses([]);
         setSelectedCard(null);
@@ -43,7 +43,6 @@ const ExploreMore = () => {
   };
 
   useEffect(() => {
-    // Fetch courses initially for the default tab
     fetchCourses(currentTab);
     // eslint-disable-next-line
   }, []);
@@ -86,19 +85,36 @@ const ExploreMore = () => {
         })}
       </div>
 
-      <div className=" block h-[885px] min-[821px]:h-[550px] lg:h-[200px]"></div>
+      {/* Dynamic Height Spacer */}
+      <div
+        className={`block ${
+          courses?.length === 3
+            ? "h-[885px]"
+            : courses?.length === 2
+            ? "h-[600px]"
+            : "h-[300px]"
+        } min-[821px]:h-[550px] lg:h-[200px]`}
+      />
+
       {/* Course Cards */}
-      <div className="absolute gap-10 mt-10 lg:mt-0 justify-center lg:gap-0 flex lg:justify-between flex-wrap w-full bottom-0 min-[821px]:translate-y-[25%] translate-y-[18%]  lg:translate-y-[50%] left-1/2 -translate-x-1/2 text-black lg:mb-0 mb-7 lg:px-0 px-3 sm:w-full sm:px-2 md:w-full md:px-4 lg:w-full">
-        {courses.map((element, index) => {
-          return (
-            <CourseCard
-              key={index}
-              cardData={element}
-              selectedCard={selectedCard}
-              setSelectedCard={setSelectedCard}
-            />
-          );
-        })}
+      <div
+        className={`absolute gap-10 mt-10 lg:mt-0 justify-center lg:gap-0 flex lg:justify-between flex-wrap w-full bottom-0 left-1/2 -translate-x-1/2 text-black lg:mb-0 mb-7 lg:px-0 px-3 sm:w-full sm:px-2 md:w-full md:px-4 lg:w-full
+                    ${
+                      courses?.length === 3
+                        ? "min-[821px]:translate-y-[25%] translate-y-[18%] lg:translate-y-[50%]"
+                        : courses?.length === 2
+                        ? "min-[821px]:translate-y-[30%] translate-y-[18%] lg:translate-y-[50%]"
+                        : "min-[821px]:translate-y-[40%] translate-y-[18%] lg:translate-y-[50%]"
+                    }`}
+      >
+        {courses.map((element, index) => (
+          <CourseCard
+            key={index}
+            cardData={element}
+            selectedCard={selectedCard}
+            setSelectedCard={setSelectedCard}
+          />
+        ))}
       </div>
     </div>
   );
