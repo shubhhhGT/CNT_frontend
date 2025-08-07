@@ -2,9 +2,14 @@ import { apiConnector } from "../apiconnector";
 import { settingsEndpoints } from "../apis";
 import { toast } from "react-hot-toast";
 import { setUser } from "../../slices/profileSlice";
+import { logout } from "./authAPI";
 
-const { UPDATE_PROFILE_PICTURE_API, UPDATE_PROFILE_API, CHANGE_PASSWORD_API } =
-  settingsEndpoints;
+const {
+  UPDATE_PROFILE_PICTURE_API,
+  UPDATE_PROFILE_API,
+  CHANGE_PASSWORD_API,
+  DELETE_PROFILE_API,
+} = settingsEndpoints;
 
 export function updateProfiepicture(token, formData) {
   return async (dispatch) => {
@@ -78,4 +83,30 @@ export async function changePassword(token, formData) {
     toast.error(error.response.data.message);
   }
   toast.dismiss(toastId);
+}
+
+export function deleteProfile(token, reason, navigate) {
+  return async (dispatch) => {
+    const toastId = toast.loading("Loading...");
+    try {
+      const response = await apiConnector(
+        "DELETE",
+        DELETE_PROFILE_API,
+        { reason },
+        {
+          Authorization: `Bearer ${token}`,
+        }
+      );
+
+      if (!response.data.success) {
+        throw new Error(response.data.message);
+      }
+      toast.success("Profile Deleted Successfully");
+      dispatch(logout(navigate));
+    } catch (error) {
+      console.log("DELETE_PROFILE_API ERROR...", error);
+      toast.error("Could not delete profile");
+    }
+    toast.dismiss(toastId);
+  };
 }

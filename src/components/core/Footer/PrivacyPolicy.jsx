@@ -132,7 +132,7 @@ const PrivacyPolicy = () => {
         <ul className="list-disc list-inside text-richblack-200 space-y-2 mb-4">
           <li>
             Users can request the deletion of their personal information through
-            the user profile section, the "Delete my account" link, or by
+            the user settings section, the "Delete my account" link, or by
             emailing{" "}
             <a
               href="mailto:support@elearnmarkets.com"

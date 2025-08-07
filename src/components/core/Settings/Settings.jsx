@@ -5,6 +5,7 @@ import UpdatePassword from "./UpdatePassword";
 import { useMediaQuery } from "react-responsive";
 import { GoSidebarCollapse, GoSidebarExpand } from "react-icons/go";
 import Sidebar from "../../core/Dashboard/Sidebar";
+import DeleteProfile from "./DeleteProfile";
 
 const Settings = () => {
   // Media query to check if screen size is greater than 768px
@@ -44,6 +45,8 @@ const Settings = () => {
       <EditProfile />
       {/* Component to chnage password */}
       <UpdatePassword />
+      {/* Component to delete profile */}
+      <DeleteProfile />
     </div>
   );
 };

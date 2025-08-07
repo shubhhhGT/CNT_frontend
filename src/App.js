@@ -58,6 +58,7 @@ import AllInvoices from "./components/core/Dashboard/AllInvoices";
 import AllCertificates from "./components/core/Dashboard/AllCertificates";
 import SocialMediaStats from "./components/core/Dashboard/SocialMediaStats";
 import CareersPage from "./components/core/Footer/Careers";
+import DeleteYourAccount from "./components/core/Footer/DeleteYourAccount";
 
 function App() {
   const { user } = useSelector((state) => state.profile);
@@ -92,6 +93,7 @@ function App() {
         <Route path="/refund-policy" element={<RefundPolicy />} />
         <Route path="/grievance-policy" element={<GrievancePolicy />} />
         <Route path="/careers" element={<CareersPage />} />
+        <Route path="/delete-your-account" element={<DeleteYourAccount />} />
 
         <Route
           path="login"
