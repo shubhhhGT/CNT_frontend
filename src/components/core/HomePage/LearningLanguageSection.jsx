@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import HighlightText from "./HighlightText";
-import Know_your_progress from "../../../assets/Images/Know_your_progress.png";
-import Compare_with_others from "../../../assets/Images/Compare_with_others.png";
-import Plan_your_lessons from "../../../assets/Images/Plan_your_lessons.png";
 import CTAButton from "./Button";
 import { getCourseByStratergy } from "../../../services/operations/courseDetailsAPI";
 import StratergyCards from "./StratergyCards";

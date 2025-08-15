@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useInView } from "react-intersection-observer";
 
 const AnimatedQuote = ({ children }) => {
   const [isHighlighted, setIsHighlighted] = useState(false);
