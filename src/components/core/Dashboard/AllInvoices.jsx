@@ -55,12 +55,7 @@ const AllInvoices = () => {
                   <td className="px-4 py-3">{invoice.invoiceDate}</td>
                   <td className="px-4 py-3">{invoice.customerName}</td>
                   <td className="px-4 py-3">{invoice.courseName.join(", ")}</td>
-                  <td className="px-4 py-3">
-                    {(
-                      invoice.rate * invoice.quantity +
-                      invoice.gstAmount
-                    ).toFixed(2)}
-                  </td>
+                  <td className="px-4 py-3">{invoice.rate.toFixed(2)}</td>
                   <td className="px-4 py-3">
                     <a
                       href={invoice.pdfUrl}
