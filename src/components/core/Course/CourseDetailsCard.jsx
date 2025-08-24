@@ -191,10 +191,26 @@ const CourseDetailsCard = ({
                 const allFieldsFilled = Object.values(billingInfo).every(
                   (value) => value.trim() !== ""
                 );
+                // if (!allFieldsFilled) {
+                //   setFormError("All billing fields are required.");
+                //   return;
+                // }
+
                 if (!allFieldsFilled) {
+                  // Show toast notification
+                  toast.error(
+                    "Please fill all billing details to proceed with purchase"
+                  );
+
+                  // Expand billing form if it's not visible
+                  if (!showBillingForm) {
+                    setShowBillingForm(true);
+                  }
+
                   setFormError("All billing fields are required.");
                   return;
                 }
+
                 setFormError("");
                 handleBuyCourse(billingInfo);
               }
