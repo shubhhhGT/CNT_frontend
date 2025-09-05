@@ -171,9 +171,13 @@ const Cart = () => {
                       key={field}
                       type="text"
                       required
-                      placeholder={field
-                        .replace(/([A-Z])/g, " $1")
-                        .replace(/^./, (s) => s.toUpperCase())}
+                      placeholder={
+                        field === "placeOfSupply"
+                          ? "State"
+                          : field
+                              .replace(/([A-Z])/g, " $1")
+                              .replace(/^./, (s) => s.toUpperCase())
+                      }
                       value={billingInfo[field]}
                       onChange={(e) =>
                         setBillingInfo((prev) => ({
