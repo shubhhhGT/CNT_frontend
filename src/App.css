@@ -179,3 +179,8 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
+
+a {
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
