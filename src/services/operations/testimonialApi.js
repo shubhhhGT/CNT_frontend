@@ -14,7 +14,7 @@ export async function getAllTestimonials() {
       throw new Error(response.data.message);
     }
 
-    result = response.data.testimonials;
+    result = response.data.data;
   } catch (error) {
     console.log("GET_ALL_TESTIMONIALS ERROR...", error);
     toast.error("Could not get all testimonials");

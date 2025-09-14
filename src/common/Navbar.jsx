@@ -194,10 +194,10 @@ const Navbar = () => {
                 <li key={i} className="group">
                   {ele.title === "Courses" ? (
                     <div className="relative gap-x-2 flex items-center group mb-2 ">
-                      <IoIosArrowBack className="group-hover:cursor-pointer" />
+                      <IoIosArrowBack className="group-hover:cursor-pointer -rotate-90" />
                       <p className="group-hover:cursor-pointer">{ele.title}</p>
-                      <div className="invisible absolute -left-[60%] -top-[130%] z-[1000] flex w-[200px] translate-x-[-70%] -translate-y-[3em] flex-col rounded-lg bg-richblack-5 p-4 text-richblack-900 opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]">
-                        <div className="absolute  right-[7%] top-[7%] -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5 "></div>
+                      <div className="invisible absolute left-[30%] top-[10%] z-[1000] flex w-[220px] translate-x-[-70%] -translate-y-[3em] flex-col rounded-lg bg-richblack-5 p-2 text-richblack-900 opacity-0 transition-all duration-150 group-hover:visible group-hover:translate-y-[1.65em] group-hover:opacity-100 lg:w-[300px]">
+                        <div className="absolute  right-[52%] top-[1%] -z-10 h-6 w-6 translate-x-[80%] translate-y-[-40%] rotate-45 select-none rounded bg-richblack-5 "></div>
                         {loading ? (
                           <Spinner />
                         ) : subLinks.length ? (
@@ -208,7 +208,7 @@ const Navbar = () => {
                                 .join("-")
                                 .toLowerCase()}`}
                               key={i}
-                              className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50"
+                              className="rounded-lg bg-transparent py-3 pl-2 hover:bg-richblack-50"
                             >
                               <p onClick={() => setIsNavbarCollapsed(true)}>
                                 {subLink.name}

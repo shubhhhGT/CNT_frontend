@@ -17,6 +17,43 @@ const ExploreMore = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   // eslint-disable-next-line
   const [loading, setLoading] = useState(false);
+  const [topPosition, setTopPosition] = useState("20%");
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 768 && window.innerWidth <= 820) {
+        setTopPosition("14%");
+      } else {
+        setTopPosition("20%");
+      }
+    };
+
+    // Run once on mount
+    handleResize();
+
+    // Add listener
+    window.addEventListener("resize", handleResize);
+
+    // Cleanup
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const [smallTop, setSmallTop] = useState("22%");
+
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 450 && window.innerWidth < 768) {
+        setSmallTop("17%");
+      } else {
+        setSmallTop("22%");
+      }
+    };
+
+    handleResize(); // run once
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const fetchCourses = async (courseType) => {
     setLoading(true);
@@ -48,7 +85,7 @@ const ExploreMore = () => {
   }, []);
 
   return (
-    <div>
+    <div className="relative">
       {/* Heading */}
       <div className="sm:w-full w-[90%] lg:text-4xl text-3xl font-semibold sm:text-center pl-3 sm:p-0">
         CNT Academy -
@@ -56,7 +93,7 @@ const ExploreMore = () => {
       </div>
 
       {/* Sub Heading */}
-      <div className="sm:text-center pl-3 sm:p-0 text-richblack-300 text-[16px] md:text-lg font-semibold mt-3 mb-24 lg:mb-0">
+      <div className="sm:text-center pl-3 sm:p-0 text-richblack-300 text-[16px] md:text-lg font-semibold mt-3 mb-[240px] md:mb-[250px] lg:mb-0">
         At CNT Academy, we provide a structured and results-driven approach to
         stock market education. Whether you're just starting or looking to
         refine your advanced strategies, our courses are designed to empower you
@@ -83,6 +120,44 @@ const ExploreMore = () => {
             </div>
           );
         })}
+      </div>
+
+      {/* Tabs - Medium screens */}
+      <div
+        className="hidden md:flex lg:hidden absolute mt-5 left-1/2 transform -translate-x-1/2 gap-3 bg-richblack-800 text-richblack-200 p-1 rounded-full font-medium drop-shadow-[0_1.5px_rgba(255,255,255,0.25)]"
+        style={{ top: topPosition }}
+      >
+        {tabNames.map((element, index) => (
+          <div
+            key={index}
+            onClick={() => setMyCards(element)}
+            className={`text-sm flex items-center gap-1 rounded-full transition-all duration-200 cursor-pointer px-5 py-1 ${
+              currentTab === element
+                ? "bg-richblack-900 text-richblack-5 font-medium"
+                : "text-richblack-200 hover:bg-richblack-900 hover:text-richblack-5"
+            }`}
+          >
+            {element}
+          </div>
+        ))}
+      </div>
+
+      {/* Tabs - Small / Mobile screens */}
+      <div
+        className="md:hidden absolute w-full mt-4 px-3"
+        style={{ top: smallTop }}
+      >
+        <select
+          value={currentTab}
+          onChange={(e) => setMyCards(e.target.value)}
+          className="w-full rounded-lg bg-richblack-800 text-richblack-200 px-4 py-3 text-sm font-medium shadow-md focus:outline-none focus:ring-2 focus:ring-yellow-400"
+        >
+          {tabNames.map((element, index) => (
+            <option key={index} value={element}>
+              {element}
+            </option>
+          ))}
+        </select>
       </div>
 
       {/* Dynamic Height Spacer */}

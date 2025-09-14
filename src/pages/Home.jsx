@@ -188,7 +188,7 @@ const Home = () => {
               transition={{ duration: 4, repeat: Infinity }}
             />
             <motion.div
-              className="flex flex-row gap-7 text-white lg:mt-8"
+              className="flex flex-row gap-7 text-white mt-8"
               variants={{
                 hidden: { opacity: 0 },
                 visible: { opacity: 1, transition: { staggerChildren: 0.2 } },

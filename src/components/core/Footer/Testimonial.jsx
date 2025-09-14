@@ -6,14 +6,27 @@ import { getAllTestimonials } from "../../../services/operations/testimonialApi"
 const TestimonialCard = ({ testimonial }) => {
   const [expanded, setExpanded] = useState(false);
 
-  const { user, course, description, rating, videoUrl } = testimonial;
-  const fullName = `${user.firstName} ${user.lastName}`;
+  const {
+    user = {},
+    course = {},
+    review = "",
+    rating = 0,
+    videoUrl = "",
+  } = testimonial;
+  const fullName = `${user.firstName} ${user.lastName || ""}`;
+
+  const cardVariants = {
+    hidden: { y: 50, opacity: 0 },
+    show: { y: 0, opacity: 1 },
+  };
 
   return (
     <motion.div
-      initial={{ y: 100, opacity: 0 }}
+      initial={{ y: 50, opacity: 0 }}
       whileInView={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6, delay: 0.2 }}
+      transition={{ duration: 0.5 }}
+      viewport={{ once: true, amount: 0.2 }}
+      variants={cardVariants}
       className="relative bg-richblack-700 p-6 rounded-2xl border-richblack-600 border-2 hover:border-transparent transition-all group overflow-hidden"
     >
       <div className="absolute inset-0 bg-gradient-to-br from-[#3d00e633] to-[#dc23f933] opacity-0 group-hover:opacity-30 transition-opacity" />
@@ -57,12 +70,12 @@ const TestimonialCard = ({ testimonial }) => {
 
         {/* Description */}
         <p className="text-blue-200 text-base font-medium mb-2">
-          {expanded || description.length <= 120
-            ? description
-            : description.slice(0, 120) + "..."}
+          {expanded || review?.length <= 120
+            ? review
+            : review.slice(0, 120) + "..."}
         </p>
 
-        {description.length > 120 && (
+        {review.length > 120 && (
           <button
             onClick={() => setExpanded((prev) => !prev)}
             className="text-blue-400 underline text-sm"
@@ -107,11 +120,24 @@ const TestimonialsPage = () => {
           No testimonials available yet.
         </p>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <motion.div
+          variants={{
+            hidden: { opacity: 0 },
+            show: {
+              opacity: 1,
+              transition: {
+                staggerChildren: 0.15,
+              },
+            },
+          }}
+          initial="hidden"
+          animate="show"
+          className="grid grid-cols-1 md:grid-cols-2 gap-6"
+        >
           {testimonials.map((testimonial) => (
             <TestimonialCard key={testimonial._id} testimonial={testimonial} />
           ))}
-        </div>
+        </motion.div>
       )}
     </div>
   );
