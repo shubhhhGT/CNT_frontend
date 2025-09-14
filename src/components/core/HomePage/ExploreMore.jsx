@@ -42,18 +42,30 @@ const ExploreMore = () => {
 
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth >= 450 && window.innerWidth < 768) {
-        setSmallTop("17%");
-      } else {
-        setSmallTop("22%");
+      if (window.innerWidth < 450) {
+        if (courses.length === 3) {
+          setSmallTop("22%");
+        } else if (courses.length === 2) {
+          setSmallTop("28%");
+        } else {
+          setSmallTop("45%");
+        }
+      } else if (window.innerWidth >= 450 && window.innerWidth < 768) {
+        if (courses.length === 3) {
+          setSmallTop("17%");
+        } else if (courses.length === 2) {
+          setSmallTop("21%");
+        } else {
+          setSmallTop("30%");
+        }
       }
     };
 
-    handleResize(); // run once
+    handleResize();
     window.addEventListener("resize", handleResize);
 
     return () => window.removeEventListener("resize", handleResize);
-  }, []);
+  }, [courses.length]); // keep resize + courses updates
 
   const fetchCourses = async (courseType) => {
     setLoading(true);
@@ -143,10 +155,7 @@ const ExploreMore = () => {
       </div>
 
       {/* Tabs - Small / Mobile screens */}
-      <div
-        className="md:hidden absolute w-full mt-4 px-3"
-        style={{ top: smallTop }}
-      >
+      <div className="md:hidden absolute w-full px-3" style={{ top: smallTop }}>
         <select
           value={currentTab}
           onChange={(e) => setMyCards(e.target.value)}
