@@ -97,4 +97,11 @@ export const sidebarLinks = [
     type: ACCOUNT_TYPE.ADMIN,
     icon: "VscBroadcast",
   },
+  {
+    id: 14,
+    name: "User Report",
+    path: "/dashboard/userReports",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscBriefcase",
+  },
 ];

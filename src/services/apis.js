@@ -149,3 +149,8 @@ export const couponEndpoints = {
 export const invoiceEndpoints = {
   GET_ALL_INVOICES: BASE_URL + "/invoice/getAllInvoices",
 };
+
+// User reports
+export const userReportEndpoints = {
+  GET_USER_REPORT: BASE_URL + "/report/download-user-report",
+};

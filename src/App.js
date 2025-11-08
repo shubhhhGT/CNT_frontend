@@ -59,6 +59,7 @@ import AllCertificates from "./components/core/Dashboard/AllCertificates";
 import SocialMediaStats from "./components/core/Dashboard/SocialMediaStats";
 import CareersPage from "./components/core/Footer/Careers";
 import DeleteYourAccount from "./components/core/Footer/DeleteYourAccount";
+import AdminUserReport from "./components/core/Dashboard/AdminUserReport";
 
 function App() {
   const { user } = useSelector((state) => state.profile);
@@ -209,6 +210,12 @@ function App() {
               <Route
                 path="dashboard/updateStats"
                 element={<SocialMediaStats />}
+              />
+
+              {/* User Reports */}
+              <Route
+                path="dashboard/userReports"
+                element={<AdminUserReport />}
               />
 
               <Route

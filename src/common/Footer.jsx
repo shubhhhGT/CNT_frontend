@@ -204,7 +204,15 @@ const Footer = () => {
 
           <div className="text-center">
             Made with <span style={{ color: "red" }}>&#10084;&#65039;</span>{" "}
-            ShubhamGoswami © 2025 CntAcademy
+            <a
+              href="https://www.linkedin.com/in/shubham-goswami-504838272/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:cursor-pointer hover:text-blue-25 transition-colors duration-200"
+            >
+              ShubhamGoswami
+            </a>{" "}
+            © 2025 CntAcademy
           </div>
         </div>
       </div>
