@@ -172,8 +172,7 @@ const CourseDetails = () => {
   const learnPoints = whatYouWillLearn
     .split(".")
     .map((point) => point.trim())
-    .filter((point) => point.length > 0)
-    .slice(0, -1);
+    .filter((point) => point.length > 0);
 
   return (
     <>

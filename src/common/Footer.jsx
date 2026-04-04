@@ -55,14 +55,14 @@ const Footer = () => {
                   <FaFacebook className="hover:cursor-pointer hover:text-richblack-50" />
                 </a>
                 <a
-                  href="https://www.instagram.com/cntacademy01/"
+                  href="https://www.instagram.com/cntacademyofficial/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
                   <FaInstagram className="hover:cursor-pointer hover:text-richblack-50" />
                 </a>
                 <a
-                  href="https://www.youtube.com/@cntacademy01"
+                  href="https://www.youtube.com/@cntacademyofficial"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
