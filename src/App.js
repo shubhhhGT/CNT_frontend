@@ -60,6 +60,7 @@ import SocialMediaStats from "./components/core/Dashboard/SocialMediaStats";
 import CareersPage from "./components/core/Footer/Careers";
 import DeleteYourAccount from "./components/core/Footer/DeleteYourAccount";
 import AdminUserReport from "./components/core/Dashboard/AdminUserReport";
+import SecurityEvents from "./components/core/Dashboard/SecurityEvents";
 
 function App() {
   const { user } = useSelector((state) => state.profile);
@@ -186,6 +187,10 @@ function App() {
               <Route path="dashboard/events" element={<ManageEvents />} />
               <Route path="dashboard/create-event" element={<CreateEvent />} />
               <Route path="dashboard/edit-event/:id" element={<EditEvent />} />
+              <Route
+                path="dashboard/securityEvents"
+                element={<SecurityEvents />}
+              />
 
               {/* Newsletter */}
               <Route

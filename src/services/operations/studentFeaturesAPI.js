@@ -32,13 +32,15 @@ export async function buyCourse(
   navigate,
   dispatch,
   couponCode = null,
-  billingInfo = null
+  billingInfo = null,
+  captchaToken = null,
+  setCaptchaToken,
 ) {
   const toastId = toast.loading("Loading...");
   try {
     // Load script
     const res = await loadScript(
-      "https://checkout.razorpay.com/v1/checkout.js"
+      "https://checkout.razorpay.com/v1/checkout.js",
     );
 
     if (!res) {
@@ -50,8 +52,8 @@ export async function buyCourse(
     const orderResponse = await apiConnector(
       "POST",
       COURSE_PAYMENT_API,
-      { courses, couponCode, billingInfo },
-      { Authorization: `Bearer ${token}` }
+      { courses, couponCode, billingInfo, captchaToken },
+      { Authorization: `Bearer ${token}` },
     );
 
     if (!orderResponse.data.success) {
@@ -72,11 +74,15 @@ export async function buyCourse(
         email: userDetails.email,
       },
       handler: function (response) {
+        if (typeof setCaptchaToken === "function") {
+          setCaptchaToken(null);
+        }
+
         //  send successful email
         sendPaymentSuccessEmail(
           response,
           orderResponse.data.message.amount,
-          token
+          token,
         );
         // Verify payment
         verifyPayment({ ...response, courses }, token, navigate, dispatch);
@@ -89,10 +95,17 @@ export async function buyCourse(
     // Open razorpay payment window
     razorpay.open();
     razorpay.on("payment failed", function (response) {
+      if (typeof setCaptchaToken === "function") {
+        setCaptchaToken(null);
+      }
+
       toast.error("OOPS, payment failed");
       console.log(response.error);
     });
   } catch (error) {
+    if (typeof setCaptchaToken === "function") {
+      setCaptchaToken(null);
+    }
     toast.error("Could not make payment");
   }
   toast.dismiss(toastId);
@@ -110,7 +123,7 @@ async function sendPaymentSuccessEmail(response, amount, token) {
       },
       {
         Authorization: `Bearer ${token}`,
-      }
+      },
     );
   } catch (error) {}
 }

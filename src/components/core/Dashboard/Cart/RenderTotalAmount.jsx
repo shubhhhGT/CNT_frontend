@@ -1,9 +1,11 @@
 import React from "react";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { useDispatch, useSelector } from "react-redux";
 import Iconbtn from "../../../../common/Iconbtn";
 import { buyCourse } from "../../../../services/operations/studentFeaturesAPI";
 import { useNavigate } from "react-router-dom";
 import { resetCart } from "../../../../services/operations/cartAPI";
+import toast from "react-hot-toast";
 
 const RenderTotalAmount = ({
   total,
@@ -17,6 +19,7 @@ const RenderTotalAmount = ({
   const { user } = useSelector((state) => state.profile);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const [captchaToken, setCaptchaToken] = React.useState(null);
 
   const handleBuyCourse = async () => {
     const courses = cart.map((course) => course._id);
@@ -27,7 +30,9 @@ const RenderTotalAmount = ({
       navigate,
       dispatch,
       appliedCoupon?.name,
-      billingInfo
+      billingInfo,
+      captchaToken,
+      setCaptchaToken,
     );
     setCartUpdated(true);
     resetCart(token);
@@ -35,10 +40,15 @@ const RenderTotalAmount = ({
 
   const handleClick = () => {
     const allFieldsFilled = Object.values(billingInfo).every(
-      (value) => value.trim() !== ""
+      (value) => value.trim() !== "",
     );
     if (!allFieldsFilled) {
       handleCheckout?.(); // will trigger form error and show form if hidden
+      return;
+    }
+
+    if (!captchaToken) {
+      toast.error("Please verify you are human");
       return;
     }
 
@@ -52,9 +62,19 @@ const RenderTotalAmount = ({
       <p className="text-xl mb-6 text-richblack-400 line-through">
         Rs {total + 1000}
       </p>
+
+      <div className="mb-4">
+        <Turnstile
+          siteKey={process.env.REACT_APP_TURNSTILE_SITE_KEY}
+          onSuccess={(token) => setCaptchaToken(token)}
+          onExpire={() => setCaptchaToken(null)}
+        />
+      </div>
+
       <Iconbtn
         text={"Buy Now"}
         onclick={handleClick}
+        disabled={!captchaToken}
         customClasses={"w-full justify-center"}
       />
     </div>

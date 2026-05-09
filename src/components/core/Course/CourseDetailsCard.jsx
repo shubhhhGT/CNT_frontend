@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { FaShareSquare } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
@@ -22,6 +23,7 @@ const CourseDetailsCard = ({
   const [couponCode, setCouponCode] = useState("");
   const [discountedPrice, setDiscountedPrice] = useState(null);
   const [appliedCoupon, setAppliedCoupon] = useState(null);
+  const [captchaToken, setCaptchaToken] = useState(null);
 
   // For invoice
   const [showBillingForm, setShowBillingForm] = useState(false);
@@ -91,7 +93,10 @@ const CourseDetailsCard = ({
   const hasEnrolled = user && course?.studentsEntrolled.includes(user._id);
 
   return (
-    <div className="flex flex-col bg-richblack-700 rounded-md text-richblack-5 gap-4 p-4">
+    <div
+      className="flex flex-col bg-richblack-700 rounded-md text-richblack-5 gap-4 p-4"
+      id="course-buy-section"
+    >
       <img
         src={course.thumbnail}
         alt={course.courseName}
@@ -187,13 +192,23 @@ const CourseDetailsCard = ({
 
         {/* Buttons */}
         <div className="flex flex-col gap-4">
+          {/* CAPTCHA */}
+          {!hasEnrolled && (
+            <div className="mb-2">
+              <Turnstile
+                siteKey={process.env.REACT_APP_TURNSTILE_SITE_KEY}
+                onSuccess={(token) => setCaptchaToken(token)}
+                onExpire={() => setCaptchaToken(null)}
+              />
+            </div>
+          )}
           <button
             onClick={() => {
               if (user && course?.studentsEntrolled.includes(user._id)) {
                 navigate("/dashboard/enrolled-courses");
               } else {
                 const allFieldsFilled = Object.values(billingInfo).every(
-                  (value) => value.trim() !== ""
+                  (value) => value.trim() !== "",
                 );
                 // if (!allFieldsFilled) {
                 //   setFormError("All billing fields are required.");
@@ -203,7 +218,7 @@ const CourseDetailsCard = ({
                 if (!allFieldsFilled) {
                   // Show toast notification
                   toast.error(
-                    "Please fill all billing details to proceed with purchase"
+                    "Please fill all billing details to proceed with purchase",
                   );
 
                   // Expand billing form if it's not visible
@@ -216,7 +231,12 @@ const CourseDetailsCard = ({
                 }
 
                 setFormError("");
-                handleBuyCourse(billingInfo);
+                if (!captchaToken) {
+                  toast.error("Please verify you are human");
+                  return;
+                }
+
+                handleBuyCourse(billingInfo, captchaToken, setCaptchaToken);
               }
             }}
             className="cursor-pointer w-full px-4 py-2 bg-yellow-50 hover:scale-105 rounded-md text-richblack-800"

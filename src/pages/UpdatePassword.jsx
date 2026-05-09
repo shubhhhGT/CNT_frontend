@@ -1,10 +1,11 @@
 import React, { useState } from "react";
+import { useLocation, Navigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import Spinner from "../common/Spinner";
 import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai";
 import { BiArrowBack } from "react-icons/bi";
 import { Link } from "react-router-dom";
-import { resetPassword, getUser } from "../services/operations/authAPI";
+import { resetPassword } from "../services/operations/authAPI";
 import Checkbox from "../components/core/ResetPass/Checkbox";
 import ResetComplete from "./ResetComplete";
 import OTPInput from "react-otp-input";
@@ -23,8 +24,13 @@ const UpdatePassword = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const { password, confirmPassword } = formData;
   const [passResetComplete, setPassResetComplete] = useState(false);
-  const [email, setEmail] = useState("");
   const [otp, setOtp] = useState("");
+  const location = useLocation();
+  const email = location.state?.email;
+
+  if (!email) {
+    return <Navigate to="/forgot-password" />;
+  }
 
   const handleOnChange = (e) => {
     setFormData((prevData) => ({
@@ -36,11 +42,14 @@ const UpdatePassword = () => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
     dispatch(
-      resetPassword(password, confirmPassword, otp, setPassResetComplete)
+      resetPassword(
+        email,
+        password,
+        confirmPassword,
+        otp,
+        setPassResetComplete,
+      ),
     );
-    dispatch(getUser(otp)).then((userEmail) => {
-      setEmail(userEmail);
-    });
   };
 
   return (

@@ -8,6 +8,7 @@ const {
   GET_EVENT_BY_ID,
   UPDATE_EVENT,
   DELETE_EVENT,
+  GET_ALL_SECURITY_EVENTS,
 } = eventEndpoints;
 
 export async function getAllEvents() {
@@ -60,7 +61,7 @@ export async function updateEvent(updates, id, token) {
       { id, ...updates },
       {
         Authorization: `Bearer ${token}`,
-      }
+      },
     );
 
     if (!response.data.success) {
@@ -86,7 +87,7 @@ export async function deleteEvent(id, token) {
       { id: id },
       {
         Authorization: `Bearer ${token}`,
-      }
+      },
     );
 
     if (!response.data.success) {
@@ -116,6 +117,27 @@ export async function getEventById(id) {
   } catch (error) {
     console.log("GET_EVENT_BY_ID ERROR...", error);
     toast.error("Could not get the event");
+  }
+  toast.dismiss(toastId);
+  return result;
+}
+
+export async function getAllSecurityEvents(token) {
+  const toastId = toast.loading("Loading...");
+  let result = [];
+  try {
+    const response = await apiConnector("GET", GET_ALL_SECURITY_EVENTS, null, {
+      Authorization: `Bearer ${token}`,
+    });
+
+    if (!response.data.success) {
+      throw new Error(response.data.message);
+    }
+
+    result = response.data.data;
+  } catch (error) {
+    console.log("GET_ALL_SECURITY_EVENTS ERROR...", error);
+    toast.error("Could not get all the security events");
   }
   toast.dismiss(toastId);
   return result;

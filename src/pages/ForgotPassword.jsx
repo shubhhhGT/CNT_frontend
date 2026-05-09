@@ -68,7 +68,7 @@ const ForgotPassword = () => {
               </p>
             </Link>
             {emailSent && (
-              <Link to={"/update-password"}>
+              <Link to={"/update-password"} state={{ email }}>
                 <p className="flex items-center gap-x-2 text-richblack-5 cursor-pointer hover:text-yellow-50">
                   Proceed{" "}
                   <BiArrowBack style={{ transform: "rotate(180deg)" }} />

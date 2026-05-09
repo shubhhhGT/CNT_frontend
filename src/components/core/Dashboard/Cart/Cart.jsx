@@ -58,7 +58,7 @@ const Cart = () => {
 
   const handleCheckout = () => {
     const allFieldsFilled = Object.values(billingInfo).every(
-      (val) => val.trim() !== ""
+      (val) => val.trim() !== "",
     );
 
     if (!allFieldsFilled) {

@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { Turnstile } from "@marsidev/react-turnstile";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { buyCourse } from "../services/operations/studentFeaturesAPI";
@@ -39,6 +40,16 @@ const CourseDetails = () => {
   const [appliedCoupon, setAppliedCoupon] = useState(null);
   const contentRef = useRef(null);
 
+  const [captchaToken, setCaptchaToken] = useState(null);
+  const [showBilling, setShowBilling] = useState(false);
+  const [mobileBilling, setMobileBilling] = useState({
+    nameOnInvoice: "",
+    addressLine1: "",
+    addressLine2: "",
+    addressLine3: "",
+    placeOfSupply: "",
+  });
+
   // Something extra start
   // Get cartItems
   // const [cartItem, setCartItem] = useState(null);
@@ -57,12 +68,16 @@ const CourseDetails = () => {
     setIsActive(
       !isActive.includes(id)
         ? isActive.concat([id])
-        : isActive.filter((e) => e !== id)
+        : isActive.filter((e) => e !== id),
     );
   };
 
   // Adding details for course purchase
-  const handleBuyCourse = async (billingInfo) => {
+  const handleBuyCourse = async (
+    billingInfo,
+    captchaToken,
+    setCaptchaToken,
+  ) => {
     if (token) {
       await buyCourse(
         token,
@@ -71,7 +86,9 @@ const CourseDetails = () => {
         navigate,
         dispatch,
         appliedCoupon,
-        billingInfo
+        billingInfo,
+        captchaToken,
+        setCaptchaToken,
       );
       return;
     }
@@ -103,7 +120,7 @@ const CourseDetails = () => {
   // Avg review
   useEffect(() => {
     const count = GetAvgRating(
-      courseData?.data?.courseDetails?.ratingAndReviews
+      courseData?.data?.courseDetails?.ratingAndReviews,
     );
     setAvgReviewCount(count);
   }, [courseData]);
@@ -174,6 +191,8 @@ const CourseDetails = () => {
     .map((point) => point.trim())
     .filter((point) => point.length > 0);
 
+  const isEnrolled = user && studentsEntrolled.includes(user._id);
+
   return (
     <>
       <div className="relative w-full bg-richblack-800">
@@ -235,15 +254,129 @@ const CourseDetails = () => {
             </div>
             {/* checkout Buttons for small screen */}
             <div className="lg:hidden flex flex-col w-full gap-4 border-y border-y-richblack-500 py-4">
+              {!isEnrolled && (
+                <>
+                  {/* Toggle Header */}
+                  <div
+                    onClick={() => setShowBilling((prev) => !prev)}
+                    className="cursor-pointer flex justify-between items-center bg-richblack-700 px-4 py-3 rounded-md"
+                  >
+                    <p className="text-richblack-5 font-medium">
+                      Enter Billing Details
+                    </p>
+                    <span className="text-yellow-50">
+                      {showBilling ? "▲" : "▼"}
+                    </span>
+                  </div>
+                  <div
+                    className={`transition-all duration-300 overflow-hidden ${
+                      showBilling ? "max-h-[500px] mt-3" : "max-h-0"
+                    }`}
+                  >
+                    <div className="flex flex-col gap-3">
+                      <input
+                        className="p-2 rounded bg-richblack-800 border border-richblack-600 text-white"
+                        placeholder="Name"
+                        value={mobileBilling.nameOnInvoice}
+                        onChange={(e) =>
+                          setMobileBilling({
+                            ...mobileBilling,
+                            nameOnInvoice: e.target.value,
+                          })
+                        }
+                      />
+
+                      <input
+                        className="p-2 rounded bg-richblack-800 border border-richblack-600 text-white"
+                        placeholder="Address Line 1"
+                        value={mobileBilling.addressLine1}
+                        onChange={(e) =>
+                          setMobileBilling({
+                            ...mobileBilling,
+                            addressLine1: e.target.value,
+                          })
+                        }
+                      />
+
+                      <input
+                        className="p-2 rounded bg-richblack-800 border border-richblack-600 text-white"
+                        placeholder="Address Line 2"
+                        value={mobileBilling.addressLine2}
+                        onChange={(e) =>
+                          setMobileBilling({
+                            ...mobileBilling,
+                            addressLine2: e.target.value,
+                          })
+                        }
+                      />
+
+                      <input
+                        className="p-2 rounded bg-richblack-800 border border-richblack-600 text-white"
+                        placeholder="Address Line 3"
+                        value={mobileBilling.addressLine3}
+                        onChange={(e) =>
+                          setMobileBilling({
+                            ...mobileBilling,
+                            addressLine3: e.target.value,
+                          })
+                        }
+                      />
+
+                      <input
+                        className="p-2 rounded bg-richblack-800 border border-richblack-600 text-white"
+                        placeholder="State"
+                        value={mobileBilling.placeOfSupply}
+                        onChange={(e) =>
+                          setMobileBilling({
+                            ...mobileBilling,
+                            placeOfSupply: e.target.value,
+                          })
+                        }
+                      />
+
+                      {/* CAPTCHA */}
+                      <Turnstile
+                        siteKey={process.env.REACT_APP_TURNSTILE_SITE_KEY}
+                        onSuccess={(token) => setCaptchaToken(token)}
+                        onExpire={() => setCaptchaToken(null)}
+                      />
+                    </div>
+                  </div>
+                </>
+              )}
+
               <p className="text-3xl font-semibold text-richblack-5">
                 Rs. {price}
               </p>
               <button
-                onClick={
-                  user && studentsEntrolled.includes(user._id)
-                    ? () => navigate("/dashboard/enrolled-courses")
-                    : handleBuyCourse
-                }
+                onClick={() => {
+                  if (user && studentsEntrolled.includes(user._id)) {
+                    navigate("/dashboard/enrolled-courses");
+                    return;
+                  }
+
+                  if (!showBilling) {
+                    setShowBilling(true);
+                    toast("Please fill billing details");
+                    return;
+                  }
+
+                  const allFilled = Object.values(mobileBilling).every(
+                    (v) => v.trim() !== "",
+                  );
+
+                  if (!allFilled) {
+                    toast.error("Please fill billing details");
+                    return;
+                  }
+
+                  if (!captchaToken) {
+                    toast.error("Please verify you are human");
+                    return;
+                  }
+
+                  handleBuyCourse(mobileBilling, captchaToken, setCaptchaToken);
+                }}
                 className="cursor-pointer w-full px-4 py-2 bg-yellow-50 hover:scale-105 rounded-md text-richblack-800"
               >
                 {user && studentsEntrolled.includes(user._id)

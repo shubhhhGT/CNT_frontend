@@ -104,4 +104,11 @@ export const sidebarLinks = [
     type: ACCOUNT_TYPE.ADMIN,
     icon: "VscBriefcase",
   },
+  {
+    id: 15,
+    name: "Security Event",
+    path: "/dashboard/securityEvents",
+    type: ACCOUNT_TYPE.ADMIN,
+    icon: "VscBellDot",
+  },
 ];

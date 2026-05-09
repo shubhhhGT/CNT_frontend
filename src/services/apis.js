@@ -126,6 +126,7 @@ export const eventEndpoints = {
   UPDATE_EVENT: BASE_URL + "/event/update",
   CREATE_EVENT: BASE_URL + "/event/create",
   GET_EVENT_BY_ID: BASE_URL + "/event",
+  GET_ALL_SECURITY_EVENTS: BASE_URL + "/event/security-events",
 };
 
 // Newsletter endpoints
@@ -154,3 +155,6 @@ export const invoiceEndpoints = {
 export const userReportEndpoints = {
   GET_USER_REPORT: BASE_URL + "/report/download-user-report",
 };
+
+// Security Events
+export const securityEventEndpoints = {};
