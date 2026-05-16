@@ -38,6 +38,28 @@ export async function buyCourse(
 ) {
   const toastId = toast.loading("Loading...");
   try {
+    // Initiate the order
+    const orderResponse = await apiConnector(
+      "POST",
+      COURSE_PAYMENT_API,
+      { courses, couponCode, billingInfo, captchaToken },
+      { Authorization: `Bearer ${token}` },
+    );
+
+    if (orderResponse.data.isFree) {
+      toast.success("Successfully enrolled");
+
+      if (typeof setCaptchaToken === "function") {
+        setCaptchaToken(null);
+      }
+
+      navigate("/dashboard/enrolled-courses");
+
+      toast.dismiss(toastId);
+
+      return;
+    }
+
     // Load script
     const res = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js",
@@ -47,14 +69,6 @@ export async function buyCourse(
       toast.error("Razorpay SDK failed to load");
       return;
     }
-
-    // Initiate the order
-    const orderResponse = await apiConnector(
-      "POST",
-      COURSE_PAYMENT_API,
-      { courses, couponCode, billingInfo, captchaToken },
-      { Authorization: `Bearer ${token}` },
-    );
 
     if (!orderResponse.data.success) {
       throw new Error(orderResponse.data.message);
